@@ -5,7 +5,7 @@ import internetshop.model.Order;
 public interface OrderDao {
     // CRUD
 
-    public Order create(Order item);
+    public Order add(Order item);
 
     public Order get(Long id);
 

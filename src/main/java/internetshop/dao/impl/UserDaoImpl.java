@@ -6,7 +6,7 @@ import internetshop.model.User;
 
 @Dao
 public class UserDaoImpl implements UserDao {
-    public User create(User item) {
+    public User add(User item) {
         return null;
     }
 

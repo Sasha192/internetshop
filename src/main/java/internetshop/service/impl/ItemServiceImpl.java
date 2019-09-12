@@ -7,7 +7,7 @@ import internetshop.service.ItemService;
 @Service
 public class ItemServiceImpl implements ItemService {
     @Override
-    public Item create(Item item) {
+    public Item add(Item item) {
         return null;
     }
 

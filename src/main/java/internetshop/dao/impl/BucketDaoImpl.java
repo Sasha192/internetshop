@@ -6,7 +6,7 @@ import internetshop.model.Bucket;
 
 @Dao
 public class BucketDaoImpl implements BucketDao {
-    public Bucket create(Bucket item) {
+    public Bucket add(Bucket item) {
         return null;
     }
 

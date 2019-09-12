@@ -5,7 +5,7 @@ import internetshop.model.Bucket;
 import java.util.List;
 
 public interface BucketService {
-    Bucket create(Bucket bucket);
+    Bucket add(Bucket bucket);
 
     Bucket get(Long id);
 

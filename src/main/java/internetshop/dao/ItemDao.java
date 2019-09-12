@@ -5,7 +5,7 @@ import internetshop.model.Item;
 public interface ItemDao {
     // CRUD
 
-    public Item create(Item item);
+    public Item add(Item item);
 
     public Item get(Long id);
 

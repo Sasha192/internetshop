@@ -9,7 +9,7 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
     @Override
-    public User create(User user) {
+    public User add(User user) {
         return null;
     }
 

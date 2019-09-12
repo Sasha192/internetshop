@@ -5,7 +5,7 @@ import internetshop.model.User;
 public interface UserDao {
     // CRUD
 
-    public User create(User item);
+    public User add(User item);
 
     public User get(Long id);
 

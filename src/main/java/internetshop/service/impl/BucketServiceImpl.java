@@ -9,7 +9,7 @@ import java.util.List;
 @Service
 public class BucketServiceImpl implements BucketService {
     @Override
-    public Bucket create(Bucket bucket) {
+    public Bucket add(Bucket bucket) {
         return null;
     }
 

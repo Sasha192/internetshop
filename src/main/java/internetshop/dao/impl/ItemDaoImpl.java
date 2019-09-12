@@ -6,7 +6,7 @@ import internetshop.model.Item;
 
 @Dao
 public class ItemDaoImpl implements ItemDao {
-    public Item create(Item item) {
+    public Item add(Item item) {
         return null;
     }
 
