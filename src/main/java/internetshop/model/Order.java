@@ -1,10 +1,11 @@
 package internetshop.model;
 
+import internetshop.generator.IdGenerator;
+
 public class Order {
-    Bucket bucket;
-    Long customerId;
-    Double cost;
-    Long orderId;
+    private Bucket bucket;
+    private Long customerId;
+    private Double cost;
 
     public Order(final Bucket bucket, final Long customerId) {
         this.bucket = bucket;
@@ -14,14 +15,6 @@ public class Order {
 
     public void setCustomerId(final Long customer) {
         this.customerId = customer;
-    }
-
-    public Long getOrderId() {
-        return this.orderId;
-    }
-
-    public void setOrderId(final Long orderId) {
-        this.orderId = orderId;
     }
 
     public Bucket getBucket() {

@@ -1,5 +1,8 @@
 package internetshop.model;
 
+import internetshop.generator.Generator;
+import internetshop.generator.IdGenerator;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -19,9 +22,17 @@ public class Bucket {
         return this.bucketId;
     }
 
-    Bucket(Long BucketOwnerId, Long bucketId){
+    public Bucket(Long BucketOwnerId){
         this.BucketOwnerId = BucketOwnerId;
-        this.bucketId = bucketId;
+        this.bucketId = IdGenerator.getBacketId();
+        itemsList = new ArrayList<>();
+        cost = Double.valueOf(0);
+    }
+
+    public Bucket(Long BucketOwnerId, List<Item> itemsList){
+        this.itemsList = itemsList;
+        this.BucketOwnerId = BucketOwnerId;
+        this.bucketId = IdGenerator.getBacketId();
         itemsList = new ArrayList<>();
         cost = Double.valueOf(0);
     }
