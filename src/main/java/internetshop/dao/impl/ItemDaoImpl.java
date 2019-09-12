@@ -9,6 +9,7 @@ import java.util.NoSuchElementException;
 
 @Dao
 public class ItemDaoImpl implements ItemDao {
+
     @Override
     public Item add(Item item) {
         Storage.items.add(item);

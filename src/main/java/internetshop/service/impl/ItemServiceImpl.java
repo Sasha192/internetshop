@@ -8,6 +8,7 @@ import internetshop.service.ItemService;
 
 @Service
 public class ItemServiceImpl implements ItemService {
+
     @Inject
     private static ItemDao itemDao;
 

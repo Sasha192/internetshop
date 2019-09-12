@@ -1,6 +1,7 @@
 package internetshop;
 
 import internetshop.lib.Inject;
+import internetshop.lib.Injector;
 import internetshop.service.BucketService;
 import internetshop.service.ItemService;
 import internetshop.service.OrderService;
@@ -9,7 +10,7 @@ import internetshop.service.UserService;
 public class Main {
 
     @Inject
-    private static UserService userService = null;
+    private static UserService userService;
 
     @Inject
     private static OrderService orderService;
@@ -22,7 +23,7 @@ public class Main {
 
     static {
         try {
-            Injector.injectDependency();
+            Injector.injectDependencies();
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
