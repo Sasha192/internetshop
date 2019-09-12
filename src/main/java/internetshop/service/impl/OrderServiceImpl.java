@@ -32,6 +32,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order update(Order order) {
+        return orderDao.update(order);
     }
 
     @Override

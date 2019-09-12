@@ -3,7 +3,7 @@ package internetshop.model;
 import internetshop.generator.IdGenerator;
 
 public class Order {
-    private Bucket bucket;
+    private final Bucket bucket;
     private Long customerId;
     private Double cost;
 
@@ -19,10 +19,6 @@ public class Order {
 
     public Bucket getBucket() {
         return this.bucket;
-    }
-
-    public void setBucket(final Bucket bucket) {
-        this.bucket = bucket;
     }
 
     public Long getCustomerId() {

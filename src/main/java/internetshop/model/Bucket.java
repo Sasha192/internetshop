@@ -1,6 +1,5 @@
 package internetshop.model;
 
-import internetshop.generator.Generator;
 import internetshop.generator.IdGenerator;
 
 import java.util.ArrayList;
