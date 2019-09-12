@@ -8,10 +8,20 @@ import java.util.Optional;
 public class Bucket {
     private List<Item> itemsList;
     private Double cost;
-    private User BucketOwner;
+    private final Long BucketOwnerId;
+    private final Long bucketId;
 
-    Bucket(User BucketOwner){
-        this.BucketOwner = BucketOwner;
+    public Long getBucketOwnerId() {
+        return this.BucketOwnerId;
+    }
+
+    public Long getBucketId() {
+        return this.bucketId;
+    }
+
+    Bucket(Long BucketOwnerId, Long bucketId){
+        this.BucketOwnerId = BucketOwnerId;
+        this.bucketId = bucketId;
         itemsList = new ArrayList<>();
         cost = Double.valueOf(0);
     }
@@ -41,7 +51,11 @@ public class Bucket {
         return this.cost;
     }
 
-    public User getBucketOwner() {
-        return this.BucketOwner;
+    public void setItemsList(final List<Item> itemsList) {
+        this.itemsList = itemsList;
+    }
+
+    public void setCost(final Double cost) {
+        this.cost = cost;
     }
 }

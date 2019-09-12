@@ -11,7 +11,5 @@ public interface BucketDao {
 
     public Bucket update(Bucket item);
 
-    public Bucket delete(Long id);
-
-    public Bucket deleteByItem(Bucket item);
+    public void delete(Long id);
 }

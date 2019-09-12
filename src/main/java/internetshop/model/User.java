@@ -3,14 +3,14 @@ package internetshop.model;
 import java.util.List;
 
 public class User {
-    private final Long idUser;
+    private final Long userId;
     private final String login;
     private String password;
     private List<Order> completedOrders;
     private Bucket currentBucket;
 
-    public User(final Long idUser, final String login, final String password) {
-        this.idUser = idUser;
+    public User(final Long userId, final String login, final String password) {
+        this.userId = userId;
         this.login = login;
         this.password = password;
     }
@@ -19,8 +19,8 @@ public class User {
         return this.login;
     }
 
-    public Long getIdUser() {
-        return this.idUser;
+    public Long getUserId() {
+        return this.userId;
     }
 
     public String getPassword() {

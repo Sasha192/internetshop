@@ -11,7 +11,5 @@ public interface ItemDao {
 
     public Item update(Item item);
 
-    public Item delete(Long id);
-
-    public Item deleteByItem(Item item);
+    public void delete(Long id);
 }

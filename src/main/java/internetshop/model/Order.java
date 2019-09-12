@@ -2,13 +2,26 @@ package internetshop.model;
 
 public class Order {
     Bucket bucket;
-    User customer;
+    Long customerId;
     Double cost;
+    Long orderId;
 
-    public Order(final Bucket bucket, final User customer) {
+    public Order(final Bucket bucket, final Long customerId) {
         this.bucket = bucket;
-        this.customer = customer;
+        this.customerId = customerId;
         cost = bucket.getCost();
+    }
+
+    public void setCustomerId(final Long customer) {
+        this.customerId = customer;
+    }
+
+    public Long getOrderId() {
+        return this.orderId;
+    }
+
+    public void setOrderId(final Long orderId) {
+        this.orderId = orderId;
     }
 
     public Bucket getBucket() {
@@ -19,8 +32,8 @@ public class Order {
         this.bucket = bucket;
     }
 
-    public User getCustomer() {
-        return this.customer;
+    public Long getCustomerId() {
+        return this.customerId;
     }
 
     public Double getCost() {
