@@ -1,8 +1,10 @@
 package internetshop.dao.impl;
 
 import internetshop.dao.BucketDao;
+import internetshop.lib.Dao;
 import internetshop.model.Bucket;
 
+@Dao
 public class BucketDaoImpl implements BucketDao {
     public Bucket create(Bucket item) {
         return null;

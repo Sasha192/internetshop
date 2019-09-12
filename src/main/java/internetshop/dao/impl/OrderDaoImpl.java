@@ -1,8 +1,10 @@
 package internetshop.dao.impl;
 
 import internetshop.dao.OrderDao;
+import internetshop.lib.Dao;
 import internetshop.model.Order;
 
+@Dao
 public class OrderDaoImpl implements OrderDao {
     public Order create(Order item) {
         return null;

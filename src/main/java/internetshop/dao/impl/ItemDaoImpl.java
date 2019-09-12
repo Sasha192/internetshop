@@ -1,8 +1,10 @@
 package internetshop.dao.impl;
 
 import internetshop.dao.ItemDao;
+import internetshop.lib.Dao;
 import internetshop.model.Item;
 
+@Dao
 public class ItemDaoImpl implements ItemDao {
     public Item create(Item item) {
         return null;
