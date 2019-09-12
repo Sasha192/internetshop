@@ -27,53 +27,57 @@ public class Factory {
     private static OrderService orderService;
     private static UserService userService;
 
-    public static BucketDao getBucketDao(){
-        if(bucketDao == null){
+    public static BucketDao getBucketDao() {
+        if (bucketDao == null) {
             bucketDao = new BucketDaoImpl();
         }
         return bucketDao;
     }
 
-    public static ItemDao getItemDao(){
-        if(itemDao == null){
+    public static ItemDao getItemDao() {
+        if (itemDao == null) {
             itemDao = new ItemDaoImpl();
         }
         return itemDao;
     }
-    public static OrderDao getOrderDao(){
-        if(orderDao == null){
+
+    public static OrderDao getOrderDao() {
+        if (orderDao == null) {
             orderDao = new OrderDaoImpl();
         }
         return orderDao;
     }
-    public static UserDao getUserDao(){
-        if(userDao == null){
+
+    public static UserDao getUserDao() {
+        if (userDao == null) {
             userDao = new UserDaoImpl();
         }
         return userDao;
     }
-    public static ItemService getItemService(){
-        if(itemService == null){
+
+    public static ItemService getItemService() {
+        if (itemService == null) {
             itemService = new ItemServiceImpl();
         }
         return itemService;
     }
-    public static BucketService getBucketService(){
-        if(bucketService == null){
+
+    public static BucketService getBucketService() {
+        if (bucketService == null) {
             bucketService = new BucketServiceImpl();
         }
         return bucketService;
     }
 
-    public static OrderService getOrderService(){
-        if(orderService == null){
+    public static OrderService getOrderService() {
+        if (orderService == null) {
             orderService = new OrderServiceImpl();
         }
         return orderService;
     }
 
-    public static UserService getUserService(){
-        if(userService == null){
+    public static UserService getUserService() {
+        if (userService == null) {
             userService = new UserServiceImpl();
         }
         return userService;

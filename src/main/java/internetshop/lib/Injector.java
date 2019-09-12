@@ -10,7 +10,6 @@ import internetshop.dao.impl.BucketDaoImpl;
 import internetshop.dao.impl.ItemDaoImpl;
 import internetshop.dao.impl.OrderDaoImpl;
 import internetshop.dao.impl.UserDaoImpl;
-import internetshop.model.Bucket;
 import internetshop.service.BucketService;
 import internetshop.service.ItemService;
 import internetshop.service.OrderService;

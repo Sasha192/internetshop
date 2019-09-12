@@ -30,7 +30,7 @@ public class BucketServiceImpl implements BucketService {
     }
 
     @Override
-    public Bucket update(Bucket bucket){
+    public Bucket update(Bucket bucket) {
         return bucketDao.update(bucket);
     }
 

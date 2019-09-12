@@ -6,24 +6,24 @@ public class IdGenerator implements Generator {
     private static Long idUser;
     private static Long idItem;
 
-    public static Long getOrderId(){
-        if(idBacket == null){
+    public static Long getOrderId() {
+        if (idBacket == null) {
             idBacket = Long.valueOf(0L);
         }
         idBacket++;
         return idBacket;
     }
 
-    public static Long getBacketId(){
-        if(idUser == null){
+    public static Long getBacketId() {
+        if (idUser == null) {
             idUser = Long.valueOf(0L);
         }
         idUser++;
         return idUser;
     }
 
-    public static Long getItemId(){
-        if(idItem == null){
+    public static Long getItemId() {
+        if (idItem == null) {
             idItem = Long.valueOf(0L);
         }
         idItem++;
@@ -31,7 +31,7 @@ public class IdGenerator implements Generator {
     }
 
     public static Long getUserId() {
-        if(idOrder == null){
+        if (idOrder == null) {
             idOrder = Long.valueOf(0L);
         }
         idOrder++;

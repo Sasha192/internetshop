@@ -5,11 +5,11 @@ import internetshop.model.Order;
 public interface OrderDao {
     // CRUD
 
-    public Order add(Order item);
+    public Order add(Order order);
 
-    public Order get(Long id);
+    public Order get(Order order);
 
-    public Order update(Order item);
+    public Order update(Order order);
 
-    public void delete(Long id);
+    public void delete(Order order);
 }

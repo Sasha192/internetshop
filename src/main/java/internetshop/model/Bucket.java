@@ -10,45 +10,45 @@ import java.util.Optional;
 public class Bucket {
     private List<Item> itemsList;
     private Double cost;
-    private final Long BucketOwnerId;
+    private final Long bucketOwnerId;
     private final Long bucketId;
 
     public Long getBucketOwnerId() {
-        return this.BucketOwnerId;
+        return this.bucketOwnerId;
     }
 
     public Long getBucketId() {
         return this.bucketId;
     }
 
-    public Bucket(Long BucketOwnerId){
-        this.BucketOwnerId = BucketOwnerId;
+    public Bucket(Long bucketOwnerId) {
+        this.bucketOwnerId = bucketOwnerId;
         this.bucketId = IdGenerator.getBacketId();
         itemsList = new ArrayList<>();
         cost = Double.valueOf(0);
     }
 
-    public Bucket(Long BucketOwnerId, List<Item> itemsList){
+    public Bucket(Long bucketOwnerId, List<Item> itemsList) {
         this.itemsList = itemsList;
-        this.BucketOwnerId = BucketOwnerId;
+        this.bucketOwnerId = bucketOwnerId;
         this.bucketId = IdGenerator.getBacketId();
         itemsList = new ArrayList<>();
         cost = Double.valueOf(0);
     }
 
-    public void addItem(Item item){
+    public void addItem(Item item) {
         itemsList.add(item);
         cost = cost + item.getPrice();
     }
 
-    public Item removeItem(Long id){
+    public Item removeItem(Long id) {
         Optional<Item> itemToRemove = itemsList.stream()
                 .filter(item -> item.getIdItem() != id).findAny();
         itemsList.remove(itemToRemove);
-        return itemToRemove.orElseThrow(()-> new NoSuchElementException());
+        return itemToRemove.orElseThrow(() -> new NoSuchElementException());
     }
 
-    public Item removeItem(Item item){
+    public Item removeItem(Item item) {
         itemsList.remove(item);
         return item;
     }

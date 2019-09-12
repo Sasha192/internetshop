@@ -1,11 +1,13 @@
 package internetshop.model;
 
-import internetshop.generator.IdGenerator;
-
 public class Order {
-    private final Bucket bucket;
+    private Bucket bucket;
     private Long customerId;
     private Double cost;
+
+    public void setBucket(final Bucket bucket) {
+        this.bucket = bucket;
+    }
 
     public Order(final Bucket bucket, final Long customerId) {
         this.bucket = bucket;

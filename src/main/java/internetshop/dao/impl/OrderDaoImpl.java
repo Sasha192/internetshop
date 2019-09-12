@@ -16,23 +16,22 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public Order get(Long id) {
+    public Order get(Order order) {
         return Storage.orders.stream()
-                .filter(element -> element.getOrderId().equals(id))
+                .filter(element -> element.equals(order))
                 .findFirst()
-                .orElseThrow(() -> new NoSuchElementException("Can't find order with id " + id));
+                .orElseThrow(() -> new NoSuchElementException("Can't find order with id " + order));
     }
 
     @Override
     public Order update(Order newOrder) {
-        Order order = get(newOrder.getOrderId());
+        Order order = get(newOrder);
         order.setBucket(newOrder.getBucket());
-        order.setOrderId(newOrder.getCustomerId());
         return order;
     }
 
     @Override
-    public void delete(Long id) {
-        Storage.orders.removeIf(order -> order.getCustomerId().equals(id));
+    public void delete(Order order) {
+        Storage.orders.removeIf(item -> item.equals(order));
     }
 }
