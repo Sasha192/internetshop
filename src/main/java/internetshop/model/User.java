@@ -1,7 +1,6 @@
 package internetshop.model;
 
 import internetshop.generator.IdGenerator;
-
 import java.util.List;
 
 public class User {
@@ -11,8 +10,8 @@ public class User {
     private List<Order> completedOrders;
     private Bucket currentBucket;
 
-    public User(final Long userId, final String login, final String password) {
-        this.userId = IdGenerator.getUserId();
+    public User(final String login, final String password) {
+        userId = IdGenerator.getUserId();
         this.login = login;
         this.password = password;
     }

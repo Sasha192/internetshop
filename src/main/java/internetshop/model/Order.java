@@ -1,30 +1,30 @@
 package internetshop.model;
 
+import internetshop.generator.IdGenerator;
+
+import java.util.List;
+
 public class Order {
-    private Bucket bucket;
-    private Long customerId;
+    private List<Item> items;
+    private Long orderId;
     private Double cost;
+    private User user;
 
-    public void setBucket(final Bucket bucket) {
-        this.bucket = bucket;
+    public Order(List<Item> items, User user) {
+        orderId = IdGenerator.getOrderId();
+        this.items = items;
+        this.user = user;
+        cost = items.stream()
+                .map(obj -> obj.getPrice())
+                .reduce(0.0, (price1, price2) -> price1 + price2);
     }
 
-    public Order(final Bucket bucket, final Long customerId) {
-        this.bucket = bucket;
-        this.customerId = customerId;
-        cost = bucket.getCost();
+    public User getUser() {
+        return this.user;
     }
 
-    public void setCustomerId(final Long customer) {
-        this.customerId = customer;
-    }
-
-    public Bucket getBucket() {
-        return this.bucket;
-    }
-
-    public Long getCustomerId() {
-        return this.customerId;
+    public void setUser(final User user) {
+        this.user = user;
     }
 
     public Double getCost() {
@@ -33,5 +33,21 @@ public class Order {
 
     public void setCost(final Double cost) {
         this.cost = cost;
+    }
+
+    public List<Item> getItems() {
+        return this.items;
+    }
+
+    public void setItems(final List<Item> items) {
+        this.items = items;
+    }
+
+    public Long getOrderId() {
+        return this.orderId;
+    }
+
+    public void setOrderId(final Long orderId) {
+        this.orderId = orderId;
     }
 }

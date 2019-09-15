@@ -4,53 +4,42 @@ import internetshop.generator.IdGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
 
 public class Bucket {
     private List<Item> itemsList;
     private Double cost;
-    private final Long bucketOwnerId;
-    private final Long bucketId;
+    private User user;
+    private Long bucketId;
 
-    public Long getBucketOwnerId() {
-        return this.bucketOwnerId;
+    public Bucket(User user) {
+        this.user = user;
+        this.bucketId = IdGenerator.getBacketId();
+        itemsList = new ArrayList<>();
+        cost = Double.valueOf(0);
+    }
+
+    public Bucket(User user, List<Item> itemsList) {
+        this.itemsList = itemsList;
+        this.user = user;
+        this.bucketId = IdGenerator.getBacketId();
+        itemsList = new ArrayList<>();
+        cost = Double.valueOf(0);
+    }
+
+    public User getUser() {
+        return this.user;
+    }
+
+    public void setBucketId(final Long bucketId) {
+        this.bucketId = bucketId;
+    }
+
+    public void setUser(final User user) {
+        this.user = user;
     }
 
     public Long getBucketId() {
         return this.bucketId;
-    }
-
-    public Bucket(Long bucketOwnerId) {
-        this.bucketOwnerId = bucketOwnerId;
-        this.bucketId = IdGenerator.getBacketId();
-        itemsList = new ArrayList<>();
-        cost = Double.valueOf(0);
-    }
-
-    public Bucket(Long bucketOwnerId, List<Item> itemsList) {
-        this.itemsList = itemsList;
-        this.bucketOwnerId = bucketOwnerId;
-        this.bucketId = IdGenerator.getBacketId();
-        itemsList = new ArrayList<>();
-        cost = Double.valueOf(0);
-    }
-
-    public void addItem(Item item) {
-        itemsList.add(item);
-        cost = cost + item.getPrice();
-    }
-
-    public Item removeItem(Long id) {
-        Optional<Item> itemToRemove = itemsList.stream()
-                .filter(item -> item.getIdItem() != id).findAny();
-        itemsList.remove(itemToRemove);
-        return itemToRemove.orElseThrow(() -> new NoSuchElementException());
-    }
-
-    public Item removeItem(Item item) {
-        itemsList.remove(item);
-        return item;
     }
 
     public List<Item> getItemsList() {

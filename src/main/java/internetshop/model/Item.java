@@ -17,10 +17,6 @@ public class Item {
         return this.idItem;
     }
 
-    public void setIdItem(final Long idItem) {
-        this.idItem = idItem;
-    }
-
     public String getName() {
         return this.name;
     }

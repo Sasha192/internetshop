@@ -4,7 +4,6 @@ import internetshop.dao.OrderDao;
 import internetshop.dao.UserDao;
 import internetshop.lib.Inject;
 import internetshop.lib.Service;
-import internetshop.model.Bucket;
 import internetshop.model.Item;
 import internetshop.model.Order;
 import internetshop.service.OrderService;
@@ -42,9 +41,12 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order completeOrder(List<Item> items, Long userId) {
-        Order newOrder = new Order(new Bucket(userId,items),userId);
-        userDao.get(userId).getCompletedOrders().add(newOrder);
+        Order newOrder = new Order(items, userDao.get(userId));
         orderDao.add(newOrder);
+        userDao.get(userId)
+                .getCompletedOrders().add(newOrder);
+        userDao.get(userId)
+                .getCurrentBucket().getItemsList().clear();
         return newOrder;
     }
 }

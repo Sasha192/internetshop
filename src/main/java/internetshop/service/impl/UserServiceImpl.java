@@ -3,6 +3,7 @@ package internetshop.service.impl;
 import internetshop.dao.UserDao;
 import internetshop.lib.Inject;
 import internetshop.lib.Service;
+import internetshop.model.Order;
 import internetshop.model.User;
 import internetshop.service.UserService;
 
@@ -37,5 +38,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public List getOrders(Long userId) {
         return userDao.get(userId).getCompletedOrders();
+    }
+
+    @Override
+    public List<Order> getOrders(User user) {
+        return userDao.get(user.getUserId()).getCompletedOrders();
     }
 }

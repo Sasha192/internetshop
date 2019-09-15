@@ -32,43 +32,28 @@ public class Injector {
     private static Class<OrderServiceImpl> orderServiceClass = OrderServiceImpl.class;
 
     public static void injectDependencies() throws IllegalAccessException {
-        injectToItemService();
-        injectToBucketService();
-        injectToOrderService();
-        injectToUserService();
+        Class<?>[] classes = new Class[]{ItemService.class, BucketService.class,
+                OrderService.class, UserService.class};
+        for (Class objClass : classes) {
+            injectToService(objClass.getDeclaredFields());
+        }
         injectToMain();
     }
 
-    private static void injectToItemService() throws IllegalAccessException {
-        for (Field field : ItemServiceImpl.class.getDeclaredFields()) {
+    private static void injectToService(Field[] fields) throws IllegalAccessException {
+        for (Field field : fields) {
             if (field.getDeclaredAnnotation(Inject.class) != null
                     && field.getType() == ItemDao.class
                     && ItemDao.class.getDeclaredAnnotation(Dao.class) != null) {
                 field.setAccessible(true);
                 field.set(null, Factory.getItemDao());
             }
-        }
-    }
-
-    private static void injectToBucketService() throws IllegalAccessException {
-        for (Field field : BucketServiceImpl.class.getDeclaredFields()) {
             if (field.getDeclaredAnnotation(Inject.class) != null
                     && field.getType() == BucketDao.class
                     && BucketDao.class.getDeclaredAnnotation(Dao.class) != null) {
                 field.setAccessible(true);
                 field.set(null, Factory.getBucketDao());
             }
-            if (field.getDeclaredAnnotation(Inject.class) != null
-                    && field.getType() == ItemDao.class
-                    && ItemDao.class.getDeclaredAnnotation(Dao.class) != null) {
-                field.setAccessible(true);
-                field.set(null, Factory.getItemDao());
-            }
-        }
-    }
-
-    private static void injectToOrderService() throws IllegalAccessException {
-        for (Field field : OrderServiceImpl.class.getDeclaredFields()) {
             if (field.getDeclaredAnnotation(Inject.class) != null
                     && field.getType() == UserDao.class
                     && UserDao.class.getDeclaredAnnotation(Dao.class) != null) {
@@ -80,17 +65,6 @@ public class Injector {
                     && OrderDao.class.getDeclaredAnnotation(Dao.class) != null) {
                 field.setAccessible(true);
                 field.set(null, Factory.getOrderDao());
-            }
-        }
-    }
-
-    private static void injectToUserService() throws IllegalAccessException {
-        for (Field field : UserServiceImpl.class.getDeclaredFields()) {
-            if (field.getDeclaredAnnotation(Inject.class) != null
-                    && field.getType() == UserDao.class
-                    && UserDao.class.getDeclaredAnnotation(Dao.class) != null) {
-                field.setAccessible(true);
-                field.set(null, Factory.getItemDao());
             }
         }
     }
