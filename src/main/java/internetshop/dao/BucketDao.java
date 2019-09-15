@@ -3,8 +3,6 @@ package internetshop.dao;
 import internetshop.model.Bucket;
 
 public interface BucketDao {
-    // CRUD
-
     public Bucket add(Bucket item);
 
     public Bucket get(Long id);

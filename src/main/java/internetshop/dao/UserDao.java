@@ -3,8 +3,6 @@ package internetshop.dao;
 import internetshop.model.User;
 
 public interface UserDao {
-    // CRUD
-
     public User add(User item);
 
     public User get(Long id);
