@@ -3,7 +3,7 @@ package internetshop.generator;
 public class IdGenerator implements Generator {
     private static Long idOrder;
     private static Long idBacket;
-    private static Long idUser = 0L;
+    private static Long idUser;
     private static Long idItem;
 
     public static Long getOrderId() {
