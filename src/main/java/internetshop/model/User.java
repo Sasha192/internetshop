@@ -17,15 +17,15 @@ public class User {
     }
 
     public String getLogin() {
-        return this.login;
+        return login;
     }
 
     public Long getUserId() {
-        return this.userId;
+        return userId;
     }
 
     public String getPassword() {
-        return this.password;
+        return password;
     }
 
     public void setPassword(final String password) {
@@ -33,7 +33,7 @@ public class User {
     }
 
     public List<Order> getCompletedOrders() {
-        return this.completedOrders;
+        return completedOrders;
     }
 
     public void setCompletedOrders(final List<Order> completedOrders) {
@@ -41,7 +41,7 @@ public class User {
     }
 
     public Bucket getCurrentBucket() {
-        return this.currentBucket;
+        return currentBucket;
     }
 
     public void setCurrentBucket(final Bucket currentBucket) {

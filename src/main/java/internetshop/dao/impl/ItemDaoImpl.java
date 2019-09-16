@@ -4,7 +4,6 @@ import internetshop.dao.ItemDao;
 import internetshop.dao.Storage;
 import internetshop.lib.Dao;
 import internetshop.model.Item;
-
 import java.util.NoSuchElementException;
 
 @Dao

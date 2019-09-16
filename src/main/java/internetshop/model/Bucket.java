@@ -7,27 +7,23 @@ import java.util.List;
 
 public class Bucket {
     private List<Item> itemsList;
-    private Double cost;
     private User user;
     private Long bucketId;
 
     public Bucket(User user) {
         this.user = user;
-        this.bucketId = IdGenerator.getBacketId();
+        bucketId = IdGenerator.getBacketId();
         itemsList = new ArrayList<>();
-        cost = Double.valueOf(0);
     }
 
     public Bucket(User user, List<Item> itemsList) {
         this.itemsList = itemsList;
         this.user = user;
-        this.bucketId = IdGenerator.getBacketId();
-        itemsList = new ArrayList<>();
-        cost = Double.valueOf(0);
+        bucketId = IdGenerator.getBacketId();
     }
 
     public User getUser() {
-        return this.user;
+        return user;
     }
 
     public void setBucketId(final Long bucketId) {
@@ -39,22 +35,14 @@ public class Bucket {
     }
 
     public Long getBucketId() {
-        return this.bucketId;
+        return bucketId;
     }
 
     public List<Item> getItemsList() {
-        return this.itemsList;
-    }
-
-    public Double getCost() {
-        return this.cost;
+        return itemsList;
     }
 
     public void setItemsList(final List<Item> itemsList) {
         this.itemsList = itemsList;
-    }
-
-    public void setCost(final Double cost) {
-        this.cost = cost;
     }
 }

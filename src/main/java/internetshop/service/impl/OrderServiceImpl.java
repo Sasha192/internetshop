@@ -9,6 +9,7 @@ import internetshop.model.Order;
 import internetshop.service.OrderService;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -48,5 +49,14 @@ public class OrderServiceImpl implements OrderService {
         userDao.get(userId)
                 .getCurrentBucket().getItemsList().clear();
         return newOrder;
+    }
+
+    public Double getCost(Order order) {
+        if(order.getItems() == null){
+            throw new NoSuchElementException();
+        }
+        return order.getItems().stream()
+                .map(obj -> obj.getPrice())
+                .reduce(0.0, (price1, price2) -> price1 + price2);
     }
 }

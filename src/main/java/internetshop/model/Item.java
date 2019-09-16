@@ -8,17 +8,17 @@ public class Item {
     private Double price;
 
     public Item(final String name, final Double price) {
-        this.idItem = IdGenerator.getItemId();
+        idItem = IdGenerator.getItemId();
         this.name = name;
         this.price = price;
     }
 
     public Long getIdItem() {
-        return this.idItem;
+        return idItem;
     }
 
     public String getName() {
-        return this.name;
+        return name;
     }
 
     public void setName(final String name) {
@@ -26,7 +26,7 @@ public class Item {
     }
 
     public Double getPrice() {
-        return this.price;
+        return price;
     }
 
     public void setPrice(final Double price) {
