@@ -5,7 +5,6 @@ import mate.academy.ishop.dao.Storage;
 import mate.academy.ishop.lib.Inject;
 import mate.academy.ishop.lib.Service;
 import mate.academy.ishop.model.Item;
-import mate.academy.ishop.model.User;
 import mate.academy.ishop.service.ItemService;
 
 import java.util.List;
