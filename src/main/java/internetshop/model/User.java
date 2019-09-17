@@ -1,30 +1,31 @@
 package internetshop.model;
 
+import internetshop.generator.IdGenerator;
 import java.util.List;
 
 public class User {
-    private final Long idUser;
+    private final Long userId;
     private final String login;
     private String password;
     private List<Order> completedOrders;
     private Bucket currentBucket;
 
-    public User(final Long idUser, final String login, final String password) {
-        this.idUser = idUser;
+    public User(final String login, final String password) {
+        userId = IdGenerator.getUserId();
         this.login = login;
         this.password = password;
     }
 
     public String getLogin() {
-        return this.login;
+        return login;
     }
 
-    public Long getIdUser() {
-        return this.idUser;
+    public Long getUserId() {
+        return userId;
     }
 
     public String getPassword() {
-        return this.password;
+        return password;
     }
 
     public void setPassword(final String password) {
@@ -32,7 +33,7 @@ public class User {
     }
 
     public List<Order> getCompletedOrders() {
-        return this.completedOrders;
+        return completedOrders;
     }
 
     public void setCompletedOrders(final List<Order> completedOrders) {
@@ -40,7 +41,7 @@ public class User {
     }
 
     public Bucket getCurrentBucket() {
-        return this.currentBucket;
+        return currentBucket;
     }
 
     public void setCurrentBucket(final Bucket currentBucket) {

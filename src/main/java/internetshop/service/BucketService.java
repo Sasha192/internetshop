@@ -5,7 +5,7 @@ import internetshop.model.Bucket;
 import java.util.List;
 
 public interface BucketService {
-    Bucket create(Bucket bucket);
+    Bucket add(Bucket bucket);
 
     Bucket get(Long id);
 
@@ -15,7 +15,7 @@ public interface BucketService {
 
     Bucket addItem(Long bucketId, Long itemId);
 
-    Bucket clear(Long bucketId); //remove all items from bucket
+    Bucket clear(Long bucketId);
 
     List getAllItems(Long bucketId);
 }

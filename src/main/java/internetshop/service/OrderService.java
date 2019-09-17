@@ -6,7 +6,7 @@ import internetshop.model.Order;
 import java.util.List;
 
 public interface OrderService {
-    Order create(Order order);
+    Order add(Order order);
 
     Order get(Long id);
 

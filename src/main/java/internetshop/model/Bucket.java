@@ -1,47 +1,48 @@
 package internetshop.model;
 
+import internetshop.generator.IdGenerator;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
 
 public class Bucket {
     private List<Item> itemsList;
-    private Double cost;
-    private User BucketOwner;
+    private User user;
+    private Long bucketId;
 
-    Bucket(User BucketOwner){
-        this.BucketOwner = BucketOwner;
+    public Bucket(User user) {
+        this.user = user;
+        bucketId = IdGenerator.getBacketId();
         itemsList = new ArrayList<>();
-        cost = Double.valueOf(0);
     }
 
-    public void addItem(Item item){
-        itemsList.add(item);
-        cost = cost + item.getPrice();
+    public Bucket(User user, List<Item> itemsList) {
+        this.itemsList = itemsList;
+        this.user = user;
+        bucketId = IdGenerator.getBacketId();
     }
 
-    public Item removeItem(Long id){
-        Optional<Item> itemToRemove = itemsList.stream()
-                .filter(item -> item.getIdItem() != id).findAny();
-        itemsList.remove(itemToRemove);
-        return itemToRemove.orElseThrow(()-> new NoSuchElementException());
+    public User getUser() {
+        return user;
     }
 
-    public Item removeItem(Item item){
-        itemsList.remove(item);
-        return item;
+    public void setBucketId(final Long bucketId) {
+        this.bucketId = bucketId;
+    }
+
+    public void setUser(final User user) {
+        this.user = user;
+    }
+
+    public Long getBucketId() {
+        return bucketId;
     }
 
     public List<Item> getItemsList() {
-        return this.itemsList;
+        return itemsList;
     }
 
-    public Double getCost() {
-        return this.cost;
-    }
-
-    public User getBucketOwner() {
-        return this.BucketOwner;
+    public void setItemsList(final List<Item> itemsList) {
+        this.itemsList = itemsList;
     }
 }

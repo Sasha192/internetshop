@@ -1,33 +1,41 @@
 package internetshop.model;
 
+import internetshop.generator.IdGenerator;
+
+import java.util.List;
+
 public class Order {
-    Bucket bucket;
-    User customer;
-    Double cost;
+    private List<Item> items;
+    private Long orderId;
+    private User user;
 
-    public Order(final Bucket bucket, final User customer) {
-        this.bucket = bucket;
-        this.customer = customer;
-        cost = bucket.getCost();
+    public Order(List<Item> items, User user) {
+        orderId = IdGenerator.getOrderId();
+        this.items = items;
+        this.user = user;
     }
 
-    public Bucket getBucket() {
-        return this.bucket;
+    public User getUser() {
+        return user;
     }
 
-    public void setBucket(final Bucket bucket) {
-        this.bucket = bucket;
+    public void setUser(final User user) {
+        this.user = user;
     }
 
-    public User getCustomer() {
-        return this.customer;
+    public List<Item> getItems() {
+        return items;
     }
 
-    public Double getCost() {
-        return this.cost;
+    public void setItems(final List<Item> items) {
+        this.items = items;
     }
 
-    public void setCost(final Double cost) {
-        this.cost = cost;
+    public Long getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(final Long orderId) {
+        this.orderId = orderId;
     }
 }

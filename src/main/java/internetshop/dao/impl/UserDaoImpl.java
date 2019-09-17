@@ -1,28 +1,38 @@
 package internetshop.dao.impl;
 
+import internetshop.dao.Storage;
 import internetshop.dao.UserDao;
 import internetshop.lib.Dao;
 import internetshop.model.User;
 
+import java.util.NoSuchElementException;
+
 @Dao
 public class UserDaoImpl implements UserDao {
-    public User create(User item) {
-        return null;
+    @Override
+    public User add(User user) {
+        Storage.users.add(user);
+        return user;
     }
 
+    @Override
     public User get(Long id) {
-        return null;
+        return Storage.users.stream()
+                .filter(user -> user.getUserId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new NoSuchElementException("Can't find user with id " + id));
     }
 
-    public User update(User item) {
-        return null;
+    @Override
+    public User update(User newUser) {
+        User user = get(newUser.getUserId());
+        user.setCurrentBucket(newUser.getCurrentBucket());
+        user.setCompletedOrders(newUser.getCompletedOrders());
+        return user;
     }
 
-    public User delete(Long id) {
-        return null;
-    }
-
-    public User deleteByItem(User item) {
-        return null;
+    @Override
+    public void delete(Long id) {
+        Storage.users.removeIf(user -> user.getUserId().equals(id));
     }
 }
