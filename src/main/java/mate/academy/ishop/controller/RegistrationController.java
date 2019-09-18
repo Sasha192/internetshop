@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class RegistrationController extends HttpServlet {
@@ -23,6 +24,8 @@ public class RegistrationController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = new User(req.getParameter("name"), req.getParameter("psw"));
         userService.add(user);
-        resp.sendRedirect(req.getContextPath() + "/register");
+        HttpSession session = req.getSession(true);
+        session.setAttribute("user", user);
+        resp.sendRedirect(req.getContextPath() + "/items");
     }
 }

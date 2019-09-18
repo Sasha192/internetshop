@@ -18,13 +18,13 @@
         <tr>
             <td>${item.name}</td>
             <td>${item.price}</td>
-            <td><a href="addToBucket?item_id=${item.idItem}&user=${user.userId}">Add</a></td>
+            <td><a href="items/additems?item=${item.idItem}">Add</a></td>
         </tr>
     </c:forEach>
 </table>
 <br>
-<a href="bucket">GO TO BUCKET</a>
+<a href="user/bucket">GO TO BUCKET</a>
 <br>
-<a href="showAllOrders">GO TO ORDERS</a>
+<a href="user/showAllOrders">GO TO ORDERS</a>
 </body>
 </html>

@@ -50,7 +50,15 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>bucket</servlet-name>
-        <url-pattern>/bucket</url-pattern>
+        <url-pattern>/user/bucket</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>delete</servlet-name>
+        <servlet-class>mate.academy.ishop.controller.DeleteItemController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>delete</servlet-name>
+        <url-pattern>/user/delete/*</url-pattern>
     </servlet-mapping>
     <listener>
         <listener-class>mate.academy.ishop.controller.InjectorInitializer</listener-class>

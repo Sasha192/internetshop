@@ -44,6 +44,22 @@
         <servlet-name>addItems</servlet-name>
         <url-pattern>/items/additems/*</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>bucket</servlet-name>
+        <servlet-class>mate.academy.ishop.controller.BucketController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>bucket</servlet-name>
+        <url-pattern>/user/bucket</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>delete</servlet-name>
+        <servlet-class>mate.academy.ishop.controller.DeleteItemController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>delete</servlet-name>
+        <url-pattern>/user/delete/*</url-pattern>
+    </servlet-mapping>
     <listener>
         <listener-class>mate.academy.ishop.controller.InjectorInitializer</listener-class>
     </listener>

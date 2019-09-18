@@ -18,4 +18,6 @@ public interface BucketService {
     Bucket clear(Long bucketId);
 
     List getAllItems(Long bucketId);
+
+    void removeItem(Long bucketId, Long itemId);
 }

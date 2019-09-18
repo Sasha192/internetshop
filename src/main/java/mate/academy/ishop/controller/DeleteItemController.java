@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class BucketController extends HttpServlet {
+public class DeleteItemController extends HttpServlet {
     @Inject
     private static BucketService bucketService;
 
@@ -20,6 +20,9 @@ public class BucketController extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Long bucketId = Long.valueOf(request.getParameter("bid"));
+        Long itemId = Long.valueOf(request.getParameter("itemid"));
+        bucketService.removeItem(bucketId, itemId);
         User user = (User)request.getSession().getAttribute("user");
         request.setAttribute("bucket", user.getCurrentBucket());
         request.getRequestDispatcher("/WEB-INF/views/bucket.jsp").forward(request, response);
