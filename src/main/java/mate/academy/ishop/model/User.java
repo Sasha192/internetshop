@@ -12,6 +12,13 @@ public class User {
     private List<Order> completedOrders;
     private Bucket currentBucket;
 
+    public User(final String login) {
+        userId = IdGenerator.getUserId();
+        this.login = login;
+        password = new String();
+        completedOrders = new ArrayList<Order>();
+    }
+
     public User(final String login, final String password) {
         userId = IdGenerator.getUserId();
         this.login = login;

@@ -24,6 +24,6 @@
     </tr>
 </table>
 <br>
-<a href="items">Return to the shop</a>
+<a href="../items">Return to the shop</a>
 </body>
 </html>

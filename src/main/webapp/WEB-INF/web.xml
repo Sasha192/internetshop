@@ -45,11 +45,11 @@
         <url-pattern>/items/additems/*</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>bucket</servlet-name>
+        <servlet-name>user_bucket</servlet-name>
         <servlet-class>mate.academy.ishop.controller.BucketController</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>bucket</servlet-name>
+        <servlet-name>user_bucket</servlet-name>
         <url-pattern>/user/bucket</url-pattern>
     </servlet-mapping>
     <servlet>
@@ -59,6 +59,46 @@
     <servlet-mapping>
         <servlet-name>delete</servlet-name>
         <url-pattern>/user/delete/*</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>bucketid</servlet-name>
+        <servlet-class>mate.academy.ishop.controller.BucketByIdController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>bucketid</servlet-name>
+        <url-pattern>/buckets</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>complete</servlet-name>
+        <servlet-class>mate.academy.ishop.controller.CompleteOrderController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>complete</servlet-name>
+        <url-pattern>/user/complete</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>showOrders</servlet-name>
+        <servlet-class>mate.academy.ishop.controller.ShowOrdersController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>showOrders</servlet-name>
+        <url-pattern>/user/showOrders</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>deleteOrders</servlet-name>
+        <servlet-class>mate.academy.ishop.controller.DeleteOrderController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>deleteOrders</servlet-name>
+        <url-pattern>/user/deleteorder/*</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>orderid</servlet-name>
+        <servlet-class>mate.academy.ishop.controller.OrderIdController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>orderid</servlet-name>
+        <url-pattern>/orders</url-pattern>
     </servlet-mapping>
     <listener>
         <listener-class>mate.academy.ishop.controller.InjectorInitializer</listener-class>

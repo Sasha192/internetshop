@@ -25,6 +25,6 @@
 <br>
 <a href="user/bucket">GO TO BUCKET</a>
 <br>
-<a href="user/showAllOrders">GO TO ORDERS</a>
+<a href="user/showOrders">GO TO ORDERS</a>
 </body>
 </html>

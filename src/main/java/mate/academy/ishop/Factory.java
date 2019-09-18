@@ -8,6 +8,7 @@ import mate.academy.ishop.dao.impl.BucketDaoImpl;
 import mate.academy.ishop.dao.impl.ItemDaoImpl;
 import mate.academy.ishop.dao.impl.OrderDaoImpl;
 import mate.academy.ishop.dao.impl.UserDaoImpl;
+import mate.academy.ishop.model.User;
 import mate.academy.ishop.service.BucketService;
 import mate.academy.ishop.service.ItemService;
 import mate.academy.ishop.service.OrderService;
