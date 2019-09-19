@@ -26,11 +26,10 @@ public class OrderIdController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession(true);
-        User user = new User("Anonymous");
+        User user = userService.get(Long.valueOf(0));
         List<Order> list = userService.getOrders(Long.valueOf(request.getParameter("order")));
         user.setCompletedOrders(list);
         session.setAttribute("user", user);
-        userService.add(user);
         response.sendRedirect(request.getContextPath() + "/user/showOrders");
     }
 

@@ -103,5 +103,7 @@
     <listener>
         <listener-class>mate.academy.ishop.controller.InjectorInitializer</listener-class>
     </listener>
-    
+    <listener>
+        <listener-class>mate.academy.ishop.controller.MockDataInitializer</listener-class>
+    </listener>
 </web-app>

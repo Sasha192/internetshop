@@ -23,10 +23,9 @@ public class BucketByIdController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession(true);
-        User user = new User("Anonymous");
+        User user = userService.get(Long.valueOf(0));
         user.setCurrentBucket(bucketService.get(Long.valueOf(request.getParameter("bucket"))));
         session.setAttribute("user", user);
-        userService.add(user);
         response.sendRedirect(request.getContextPath() + "/user/bucket");
     }
 
