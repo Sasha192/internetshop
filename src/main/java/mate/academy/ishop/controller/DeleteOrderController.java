@@ -14,7 +14,8 @@ public class DeleteOrderController extends HttpServlet {
     @Inject
     private static OrderService orderService;
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         orderService.delete(Long.valueOf(request.getParameter("orderid")));
         User user = (User) request.getSession().getAttribute("user");
         request.setAttribute("orders", user.getCompletedOrders());

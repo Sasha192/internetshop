@@ -1,13 +1,12 @@
 package mate.academy.ishop.service.impl;
 
+import java.util.List;
 import mate.academy.ishop.dao.ItemDao;
 import mate.academy.ishop.dao.Storage;
 import mate.academy.ishop.lib.Inject;
 import mate.academy.ishop.lib.Service;
 import mate.academy.ishop.model.Item;
 import mate.academy.ishop.service.ItemService;
-
-import java.util.List;
 
 @Service
 public class ItemServiceImpl implements ItemService {

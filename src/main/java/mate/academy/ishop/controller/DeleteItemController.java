@@ -14,7 +14,8 @@ public class DeleteItemController extends HttpServlet {
     @Inject
     private static BucketService bucketService;
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         Long bucketId = Long.valueOf(request.getParameter("bid"));
         Long itemId = Long.valueOf(request.getParameter("itemid"));
         bucketService.removeItem(bucketId, itemId);

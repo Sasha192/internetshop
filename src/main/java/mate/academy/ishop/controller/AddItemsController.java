@@ -20,7 +20,8 @@ public class AddItemsController extends HttpServlet {
     @Inject
     private static BucketService bucketService;
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request,
+                         HttpServletResponse response) throws ServletException, IOException {
         User user = (User) request.getSession().getAttribute("user");
         Item item = itemService.get(Long.valueOf(request.getParameter("item")));
         Bucket bucket = user.getCurrentBucket();

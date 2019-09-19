@@ -1,9 +1,8 @@
 package mate.academy.ishop.service;
 
+import java.util.List;
 import mate.academy.ishop.model.Order;
 import mate.academy.ishop.model.User;
-
-import java.util.List;
 
 public interface UserService {
     User add(User user);

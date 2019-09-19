@@ -1,9 +1,7 @@
 package mate.academy.ishop.service;
 
-import mate.academy.ishop.model.Item;
-import mate.academy.ishop.model.User;
-
 import java.util.List;
+import mate.academy.ishop.model.Item;
 
 public interface ItemService {
     Item add(Item item);

@@ -1,8 +1,7 @@
 package mate.academy.ishop.service;
 
-import mate.academy.ishop.model.Bucket;
-
 import java.util.List;
+import mate.academy.ishop.model.Bucket;
 
 public interface BucketService {
     Bucket add(Bucket bucket);

@@ -23,7 +23,8 @@ public class OrderIdController extends HttpServlet {
     @Inject
     private static UserService userService;
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         HttpSession session = request.getSession(true);
         User user = new User("Anonymous");
         List<Order> list = userService.getOrders(Long.valueOf(request.getParameter("order")));
@@ -33,7 +34,8 @@ public class OrderIdController extends HttpServlet {
         response.sendRedirect(request.getContextPath() + "/user/showOrders");
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         request.setAttribute("max", Integer.valueOf(Storage.orders.size() - 1));
         request.getRequestDispatcher("/WEB-INF/views/orderbyid.jsp").forward(request, response);
     }

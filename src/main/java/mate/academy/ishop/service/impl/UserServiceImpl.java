@@ -1,5 +1,6 @@
 package mate.academy.ishop.service.impl;
 
+import java.util.List;
 import mate.academy.ishop.dao.Storage;
 import mate.academy.ishop.dao.UserDao;
 import mate.academy.ishop.lib.Inject;
@@ -7,8 +8,6 @@ import mate.academy.ishop.lib.Service;
 import mate.academy.ishop.model.Order;
 import mate.academy.ishop.model.User;
 import mate.academy.ishop.service.UserService;
-
-import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {

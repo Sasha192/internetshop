@@ -1,5 +1,6 @@
 package mate.academy.ishop.service.impl;
 
+import java.util.List;
 import mate.academy.ishop.dao.BucketDao;
 import mate.academy.ishop.dao.ItemDao;
 import mate.academy.ishop.lib.Inject;
@@ -7,8 +8,6 @@ import mate.academy.ishop.lib.Service;
 import mate.academy.ishop.model.Bucket;
 import mate.academy.ishop.model.Item;
 import mate.academy.ishop.service.BucketService;
-
-import java.util.List;
 
 @Service
 public class BucketServiceImpl implements BucketService {

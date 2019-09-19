@@ -30,7 +30,8 @@ public class BucketByIdController extends HttpServlet {
         response.sendRedirect(request.getContextPath() + "/user/bucket");
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         request.setAttribute("max", Integer.valueOf(Storage.buckets.size() - 1));
         request.getRequestDispatcher("/WEB-INF/views/bucketbyid.jsp").forward(request, response);
     }

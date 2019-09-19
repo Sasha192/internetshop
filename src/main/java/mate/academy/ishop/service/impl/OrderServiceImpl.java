@@ -1,5 +1,8 @@
 package mate.academy.ishop.service.impl;
 
+import java.util.List;
+import java.util.NoSuchElementException;
+
 import mate.academy.ishop.dao.OrderDao;
 import mate.academy.ishop.dao.UserDao;
 import mate.academy.ishop.lib.Inject;
@@ -7,9 +10,6 @@ import mate.academy.ishop.lib.Service;
 import mate.academy.ishop.model.Item;
 import mate.academy.ishop.model.Order;
 import mate.academy.ishop.service.OrderService;
-
-import java.util.List;
-import java.util.NoSuchElementException;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -52,7 +52,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     public Double getCost(Order order) {
-        if(order.getItems() == null){
+        if (order.getItems() == null) {
             throw new NoSuchElementException();
         }
         return order.getItems().stream()

@@ -20,7 +20,8 @@ public class CompleteOrderController extends HttpServlet {
     @Inject
     private static BucketService bucketService;
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         User user = (User)request.getSession().getAttribute("user");
         Bucket bucket = bucketService.get(Long.valueOf(request.getParameter("bid")));
         Order order = orderService.completeOrder(bucket.getItemsList(),user.getUserId());

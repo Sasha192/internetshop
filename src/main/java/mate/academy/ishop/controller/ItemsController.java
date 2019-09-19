@@ -15,7 +15,8 @@ public class ItemsController extends HttpServlet {
     @Inject
     private static ItemService itemService;
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         List<Item> list = itemService.getAll();
         request.setAttribute("items", list);
         request.setAttribute("user", request.getSession().getAttribute("user"));

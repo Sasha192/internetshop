@@ -1,9 +1,8 @@
 package mate.academy.ishop.service;
 
+import java.util.List;
 import mate.academy.ishop.model.Item;
 import mate.academy.ishop.model.Order;
-
-import java.util.List;
 
 public interface OrderService {
     Order add(Order order);

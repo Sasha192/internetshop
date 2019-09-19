@@ -16,7 +16,8 @@ public class ShowOrdersController extends HttpServlet {
     @Inject
     private static UserService userService;
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         User user = (User) request.getSession().getAttribute("user");
         List<Order> list = user.getCompletedOrders();
         request.setAttribute("orders", list);
