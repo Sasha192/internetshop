@@ -1,9 +1,8 @@
 package mate.academy.ishop.model;
 
-import mate.academy.ishop.generator.IdGenerator;
-
 import java.util.ArrayList;
 import java.util.List;
+import mate.academy.ishop.generator.IdGenerator;
 
 public class User {
     private final Long userId;

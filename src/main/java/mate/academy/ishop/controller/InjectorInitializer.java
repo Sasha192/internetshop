@@ -1,5 +1,8 @@
 package mate.academy.ishop.controller;
 
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
+
 import mate.academy.ishop.lib.Inject;
 import mate.academy.ishop.lib.Injector;
 import mate.academy.ishop.model.Bucket;
@@ -9,17 +12,13 @@ import mate.academy.ishop.model.User;
 import mate.academy.ishop.service.BucketService;
 import mate.academy.ishop.service.ItemService;
 
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
-
 import mate.academy.ishop.service.OrderService;
 import mate.academy.ishop.service.UserService;
 import org.apache.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class InjectorInitializer implements ServletContextListener {
+    private static final Logger logger = Logger.getLogger(InjectorInitializer.class);
+
     @Inject
     private static ItemService itemService;
 
@@ -32,11 +31,10 @@ public class InjectorInitializer implements ServletContextListener {
     @Inject
     private static BucketService bucketService;
 
-    private static final Logger logger = Logger.getLogger(InjectorInitializer.class);
-
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         try {
+            logger.debug("Inject Dependencies started ... ");
             Injector.injectDependencies();
         } catch (IllegalAccessException e) {
             logger.error(e);
@@ -46,10 +44,10 @@ public class InjectorInitializer implements ServletContextListener {
         User user;
         Bucket bucket;
         Order order;
-        for(int i = 0; i < 10; i++){
+        for (int i = 0; i < 10; i++) {
             user = new User(String.valueOf(i));
             bucket = new Bucket(user);
-            order = new Order(bucket.getItemsList(),user);
+            order = new Order(bucket.getItemsList(), user);
             item = new Item(String.valueOf(i), Double.valueOf(i));
             user.setCurrentBucket(bucket);
             userService.add(user);

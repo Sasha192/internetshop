@@ -1,17 +1,17 @@
 package mate.academy.ishop.controller;
 
-import mate.academy.ishop.dao.Storage;
-import mate.academy.ishop.lib.Inject;
-import mate.academy.ishop.model.User;
-import mate.academy.ishop.service.BucketService;
-import mate.academy.ishop.service.UserService;
-
+import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
+
+import mate.academy.ishop.dao.Storage;
+import mate.academy.ishop.lib.Inject;
+import mate.academy.ishop.model.User;
+import mate.academy.ishop.service.BucketService;
+import mate.academy.ishop.service.UserService;
 
 public class BucketByIdController extends HttpServlet {
     @Inject
@@ -20,7 +20,8 @@ public class BucketByIdController extends HttpServlet {
     @Inject
     private static BucketService bucketService;
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         HttpSession session = request.getSession(true);
         User user = new User("Anonymous");
         user.setCurrentBucket(bucketService.get(Long.valueOf(request.getParameter("bucket"))));

@@ -1,17 +1,17 @@
 package mate.academy.ishop.controller;
 
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import mate.academy.ishop.lib.Inject;
 import mate.academy.ishop.lib.Injector;
 import mate.academy.ishop.service.BucketService;
 import mate.academy.ishop.service.ItemService;
 import mate.academy.ishop.service.OrderService;
 import mate.academy.ishop.service.UserService;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 public class IndexController extends HttpServlet {
 
@@ -39,6 +39,6 @@ public class IndexController extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(req,resp);
+        req.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(req, resp);
     }
 }

@@ -1,8 +1,7 @@
 package mate.academy.ishop.model;
 
-import mate.academy.ishop.generator.IdGenerator;
-
 import java.util.List;
+import mate.academy.ishop.generator.IdGenerator;
 
 public class Order {
     private List<Item> items;

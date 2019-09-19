@@ -1,12 +1,12 @@
 package mate.academy.ishop.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import mate.academy.ishop.model.Bucket;
 import mate.academy.ishop.model.Item;
 import mate.academy.ishop.model.Order;
 import mate.academy.ishop.model.User;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Storage {
     public static final List<Bucket> buckets = new ArrayList<Bucket>();

@@ -1,4 +1,5 @@
 package mate.academy.ishop.lib;
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -25,11 +26,11 @@ public class Injector {
     public static void injectDependencies() throws IllegalAccessException {
         for (Class certainClass : classList) {
             for (Field field : certainClass.getDeclaredFields()) {
-                if(field.getDeclaredAnnotation(Inject.class) != null){
+                if (field.getDeclaredAnnotation(Inject.class) != null) {
                     Object implementation = AnnotatedClassMap
                             .getImplementation(field.getType());
-                    if(implementation.getClass().getDeclaredAnnotation(Dao.class) != null ||
-                            implementation.getClass().getDeclaredAnnotation(Service.class) != null){
+                    if (implementation.getClass().getDeclaredAnnotation(Dao.class) != null ||
+                            implementation.getClass().getDeclaredAnnotation(Service.class) != null) {
                         field.setAccessible(true);
                         field.set(null, implementation);
                     }
