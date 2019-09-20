@@ -31,9 +31,8 @@ public class Injector {
                             .getImplementation(field.getType());
                     if (implementation.getClass()
                             .getDeclaredAnnotation(Dao.class) != null
-                            ||
-                            implementation
-                                    .getClass().getDeclaredAnnotation(Service.class) != null) {
+                            || implementation
+                            .getClass().getDeclaredAnnotation(Service.class) != null) {
                         field.setAccessible(true);
                         field.set(null, implementation);
                     }
