@@ -36,6 +36,7 @@ public class OrderIdController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setAttribute("max", Integer.valueOf(Storage.orders.size() - 1));
+        request.getSession().setAttribute("user",userService.get(Long.valueOf(0)));
         request.getRequestDispatcher("/WEB-INF/views/orderbyid.jsp").forward(request, response);
     }
 }
