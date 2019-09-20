@@ -8,7 +8,7 @@
 </head>
 <body>
 <h3 style="color: crimson">Welcome to the internet-shop!</h3>
-<form action="bucket" method="post">
+<form action="buckets" method="post">
     <p>Please enter your bucket u want</p>
     <hr>
     <label for="bucket"><b>BucketID</b></label>

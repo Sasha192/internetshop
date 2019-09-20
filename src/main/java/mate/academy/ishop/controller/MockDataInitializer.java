@@ -12,6 +12,7 @@ import mate.academy.ishop.service.BucketService;
 import mate.academy.ishop.service.ItemService;
 import mate.academy.ishop.service.OrderService;
 import mate.academy.ishop.service.UserService;
+import org.apache.log4j.Logger;
 
 public class MockDataInitializer implements ServletContextListener {
     @Inject
@@ -26,23 +27,28 @@ public class MockDataInitializer implements ServletContextListener {
     @Inject
     private static BucketService bucketService;
 
+    private static final Logger logger = Logger.getLogger(InjectorInitializer.class);
+
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
+        logger.info("MockDataInitializer started ...");
         Item item;
         User user;
         Bucket bucket;
         Order order;
-        user = new User("Anonymous");
-        bucket = new Bucket(user);
-        order = new Order(bucket.getItemsList(), user);
         for (int i = 0; i < 10; i++) {
             item = new Item(String.valueOf(i), Double.valueOf(i));
+            user = new User(String.valueOf(i));
+            bucket = new Bucket(user);
+            order = new Order(bucket.getItemsList(), user);
             user.setCurrentBucket(bucket);
+            user.getCompletedOrders().add(order);
             userService.add(user);
             bucketService.add(bucket);
             orderService.add(order);
             itemService.add(item);
         }
+        logger.info("MockDataInitializer ended ...");
     }
 
     @Override

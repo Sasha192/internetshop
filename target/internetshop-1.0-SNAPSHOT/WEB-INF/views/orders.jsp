@@ -12,11 +12,11 @@
     <c:forEach var="order" items="${orders}">
         <tr>
             <td>${order.orderId}</td>
-            <td><a href="user/deleteorder?orderid=${order.orderId}">Delete</a></td>
+            <td><a href="deleteorder?orderid=${order.orderId}">Delete</a></td>
         </tr>
     </c:forEach>
 </table>
 <br>
-<a href="../../items">Return to the shop</a>
+<a href="../items">Return to the shop</a>
 </body>
 </html>
