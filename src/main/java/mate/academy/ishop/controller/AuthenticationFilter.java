@@ -13,14 +13,14 @@ import java.io.IOException;
 import java.util.Optional;
 
 public class AuthenticationFilter implements Filter {
-        @Inject
-        private static UserService userService;
+    @Inject
+    private static UserService userService;
 
-        private static Logger logger = Logger.getLogger(AuthenticationFilter.class);
+    private static Logger logger = Logger.getLogger(AuthenticationFilter.class);
 
-        @Override
-        public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse,
-                             FilterChain chain) throws IOException, ServletException {
+    @Override
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse,
+                         FilterChain chain) throws IOException, ServletException {
             HttpServletRequest req = (HttpServletRequest) servletRequest;
             HttpServletResponse resp = (HttpServletResponse) servletResponse;
             for (Cookie cookie : req.getCookies()) {
