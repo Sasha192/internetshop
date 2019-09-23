@@ -1,4 +1,4 @@
-package mate.academy.ishop.controller;
+package mate.academy.ishop.controller.servlet;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,19 +10,17 @@ import javax.servlet.http.HttpServletResponse;
 import mate.academy.ishop.lib.Inject;
 import mate.academy.ishop.model.Order;
 import mate.academy.ishop.model.User;
-import mate.academy.ishop.service.OrderService;
+import mate.academy.ishop.service.UserService;
 
-public class DeleteOrderController extends HttpServlet {
+public class ShowOrdersController extends HttpServlet {
     @Inject
-    private static OrderService orderService;
+    private static UserService userService;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Long orderId = Long.valueOf(request.getParameter("orderid"));
         User user = (User) request.getSession().getAttribute("user");
-        List<Order> orders = user.getCompletedOrders();
-        orders.remove(orderService.get(orderId));
-        request.setAttribute("orders", orders);
+        List<Order> list = user.getCompletedOrders();
+        request.setAttribute("orders", list);
         request.getRequestDispatcher("/WEB-INF/views/orders.jsp").forward(request, response);
     }
 }

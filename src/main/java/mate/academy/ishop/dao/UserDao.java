@@ -1,5 +1,8 @@
 package mate.academy.ishop.dao;
 
+import java.util.Optional;
+
+import mate.academy.ishop.exceptions.AuthenticationException;
 import mate.academy.ishop.model.User;
 
 public interface UserDao {
@@ -10,4 +13,8 @@ public interface UserDao {
     public User update(User item);
 
     public void delete(Long id);
+
+    User login(String login, String password) throws AuthenticationException;
+
+    Optional<User> getByToken(String token);
 }

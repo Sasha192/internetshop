@@ -1,4 +1,4 @@
-package mate.academy.ishop.controller;
+package mate.academy.ishop.controller.servlet;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -31,6 +31,6 @@ public class AddItemsController extends HttpServlet {
             bucketService.add(bucket);
         }
         bucketService.addItem(bucket.getBucketId(), item.getIdItem());
-        response.sendRedirect(request.getContextPath() + "/items");
+        response.sendRedirect(request.getContextPath() + "/servlet/items");
     }
 }

@@ -1,4 +1,4 @@
-package mate.academy.ishop.controller;
+package mate.academy.ishop.controller.servlet;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -25,6 +25,6 @@ public class CompleteOrderController extends HttpServlet {
         User user = (User)request.getSession().getAttribute("user");
         Bucket bucket = bucketService.get(Long.valueOf(request.getParameter("bid")));
         Order order = orderService.completeOrder(bucket.getItemsList(),user.getUserId());
-        response.sendRedirect(request.getContextPath() + "/items");
+        response.sendRedirect(request.getContextPath() + "/servlet/items");
     }
 }

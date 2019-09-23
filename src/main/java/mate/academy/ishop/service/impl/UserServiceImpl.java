@@ -3,6 +3,7 @@ package mate.academy.ishop.service.impl;
 import java.util.List;
 import mate.academy.ishop.dao.Storage;
 import mate.academy.ishop.dao.UserDao;
+import mate.academy.ishop.exceptions.AuthenticationException;
 import mate.academy.ishop.lib.Inject;
 import mate.academy.ishop.lib.Service;
 import mate.academy.ishop.model.Order;
@@ -48,5 +49,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getAll() {
         return Storage.users;
+    }
+
+    @Override
+    public User login(String login, String password)
+            throws AuthenticationException {
+        return userDao.login(login, password);
     }
 }
