@@ -1,6 +1,7 @@
 package mate.academy.ishop.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import mate.academy.ishop.exceptions.AuthenticationException;
 import mate.academy.ishop.model.Order;
@@ -22,4 +23,6 @@ public interface UserService {
     List<User> getAll();
 
     User login(String login, String password) throws AuthenticationException;
+
+    Optional<User> getByToken(String value);
 }

@@ -1,6 +1,8 @@
 package mate.academy.ishop.service.impl;
 
 import java.util.List;
+import java.util.Optional;
+
 import mate.academy.ishop.dao.Storage;
 import mate.academy.ishop.dao.UserDao;
 import mate.academy.ishop.exceptions.AuthenticationException;
@@ -55,5 +57,10 @@ public class UserServiceImpl implements UserService {
     public User login(String login, String password)
             throws AuthenticationException {
         return userDao.login(login, password);
+    }
+
+    @Override
+    public Optional<User> getByToken(String token) {
+        return userDao.getByToken(token);
     }
 }
