@@ -7,6 +7,7 @@ import mate.academy.ishop.lib.Inject;
 import mate.academy.ishop.model.Bucket;
 import mate.academy.ishop.model.Item;
 import mate.academy.ishop.model.Order;
+import mate.academy.ishop.model.Role;
 import mate.academy.ishop.model.User;
 import mate.academy.ishop.service.BucketService;
 import mate.academy.ishop.service.ItemService;
@@ -39,6 +40,10 @@ public class MockDataInitializer implements ServletContextListener {
         for (int i = 0; i < 10; i++) {
             item = new Item(String.valueOf(i), Double.valueOf(i));
             user = new User(String.valueOf(i));
+            if(i == 0){
+                user.addRole(Role.of("ADMIN"));
+                user.setPassword("0");
+            }
             bucket = new Bucket(user);
             order = new Order(bucket.getItemsList(), user);
             user.setCurrentBucket(bucket);

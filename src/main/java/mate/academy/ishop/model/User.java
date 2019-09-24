@@ -1,8 +1,6 @@
 package mate.academy.ishop.model;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 import mate.academy.ishop.generator.IdGenerator;
 
@@ -13,6 +11,7 @@ public class User {
     private String password;
     private List<Order> completedOrders;
     private Bucket currentBucket;
+    private Set<Role> roles;
 
     public User(final String login) {
         userId = IdGenerator.getUserId();
@@ -20,6 +19,8 @@ public class User {
         this.login = login;
         password = new String();
         completedOrders = new ArrayList<Order>();
+        roles = new HashSet<Role>();
+        roles.add(Role.of("USER"));
     }
 
     public User(final String login, final String password) {
@@ -28,6 +29,8 @@ public class User {
         this.login = login;
         this.password = password;
         completedOrders = new ArrayList<Order>();
+        roles = new HashSet<Role>();
+        roles.add(Role.of("USER"));
     }
 
     public String getLogin() {
@@ -64,6 +67,14 @@ public class User {
 
     public String getToken() {
         return token;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void addRole(Role role) {
+        roles.add(role);
     }
 
     @Override
