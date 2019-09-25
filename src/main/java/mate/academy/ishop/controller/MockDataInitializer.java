@@ -33,19 +33,15 @@ public class MockDataInitializer implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         logger.info("MockDataInitializer started ...");
-        Item item;
-        User user;
-        Bucket bucket;
-        Order order;
         for (int i = 0; i < 10; i++) {
-            item = new Item(String.valueOf(i), Double.valueOf(i));
-            user = new User(String.valueOf(i));
+            Item item = new Item(String.valueOf(i), Double.valueOf(i));
+            User user = new User(String.valueOf(i));
             if(i == 0){
                 user.addRole(Role.of("ADMIN"));
                 user.setPassword("0");
             }
-            bucket = new Bucket(user);
-            order = new Order(bucket.getItemsList(), user);
+            Bucket bucket = new Bucket(user);
+            Order order = new Order(bucket.getItemsList(), user);
             user.setCurrentBucket(bucket);
             user.getCompletedOrders().add(order);
             userService.add(user);
