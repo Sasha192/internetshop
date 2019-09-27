@@ -1,5 +1,6 @@
 package mate.academy.ishop;
 
+import com.mysql.cj.log.Log;
 import mate.academy.ishop.dao.BucketDao;
 import mate.academy.ishop.dao.ItemDao;
 import mate.academy.ishop.dao.OrderDao;
@@ -8,6 +9,7 @@ import mate.academy.ishop.dao.impl.BucketDaoImpl;
 import mate.academy.ishop.dao.impl.ItemDaoImpl;
 import mate.academy.ishop.dao.impl.OrderDaoImpl;
 import mate.academy.ishop.dao.impl.UserDaoImpl;
+import mate.academy.ishop.dao.jdbc.ItemDaoJdbcImpl;
 import mate.academy.ishop.service.BucketService;
 import mate.academy.ishop.service.ItemService;
 import mate.academy.ishop.service.OrderService;
@@ -16,6 +18,11 @@ import mate.academy.ishop.service.impl.BucketServiceImpl;
 import mate.academy.ishop.service.impl.ItemServiceImpl;
 import mate.academy.ishop.service.impl.OrderServiceImpl;
 import mate.academy.ishop.service.impl.UserServiceImpl;
+import org.apache.log4j.Logger;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class Factory {
     private static BucketDao bucketDao;
@@ -26,6 +33,19 @@ public class Factory {
     private static ItemService itemService;
     private static OrderService orderService;
     private static UserService userService;
+    private static Connection connection;
+
+    private static Logger logger = Logger.getLogger(Factory.class);
+
+    static {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/ishop?"
+                    + "user=root&password=01123581321Sasha&serverTimezone=UTC");
+        } catch (SQLException | ClassNotFoundException e) {
+            logger.error("Can not connect to DB", e);
+        }
+    }
 
     public static BucketDao getBucketDao() {
         if (bucketDao == null) {
@@ -36,7 +56,7 @@ public class Factory {
 
     public static ItemDao getItemDao() {
         if (itemDao == null) {
-            itemDao = new ItemDaoImpl();
+            itemDao = new ItemDaoJdbcImpl(connection);
         }
         return itemDao;
     }

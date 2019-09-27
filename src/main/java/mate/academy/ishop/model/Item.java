@@ -13,6 +13,16 @@ public class Item {
         this.price = price;
     }
 
+    public Item(Long idItem, String name, Double price) {
+        this.idItem = idItem;
+        this.name = name;
+        this.price = price;
+    }
+
+    public void setIdItem(Long idItem) {
+        this.idItem = idItem;
+    }
+
     public Long getIdItem() {
         return idItem;
     }

@@ -1,5 +1,6 @@
 package mate.academy.ishop.dao.impl;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import mate.academy.ishop.dao.ItemDao;
 import mate.academy.ishop.dao.Storage;
@@ -34,5 +35,10 @@ public class ItemDaoImpl implements ItemDao {
     @Override
     public void delete(Long id) {
         Storage.items.removeIf(item -> item.getIdItem().equals(id));
+    }
+
+    @Override
+    public List<Item> getAll() {
+        return null;
     }
 }
