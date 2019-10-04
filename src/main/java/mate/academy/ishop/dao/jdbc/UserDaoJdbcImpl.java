@@ -70,10 +70,7 @@ public class UserDaoJdbcImpl extends AbstractDao<User> implements UserDao {
                 String login = resultSet.getString("login");
                 String password = resultSet.getString("password");
                 String token = resultSet.getString("token");
-                user.setUserId(userId);
-                user.setLogin(login);
-                user.setPassword(password);
-                user.setToken(token);
+                user = setUserFields(user, userId, login, password, token);
                 Role role = Role.of(resultSet.getString("name"));
                 set.add(role);
             }
@@ -131,10 +128,7 @@ public class UserDaoJdbcImpl extends AbstractDao<User> implements UserDao {
                 Long id = resultSet.getLong("userId");
                 String name = resultSet.getString("login");
                 String token = resultSet.getString("token");
-                user.setLogin(login);
-                user.setPassword(password);
-                user.setUserId(id);
-                user.setToken(token);
+                user = setUserFields(user, id, login, password, token);
                 Role role = Role.of(resultSet.getString("name"));
                 set.add(role);
             }
@@ -167,10 +161,7 @@ public class UserDaoJdbcImpl extends AbstractDao<User> implements UserDao {
                 Long id = resultSet.getLong("userId");
                 String login = resultSet.getString("login");
                 String password = resultSet.getString("password");
-                user.setLogin(login);
-                user.setPassword(password);
-                user.setUserId(id);
-                user.setToken(token);
+                user = setUserFields(user, id, login, password, token);
                 Role role = Role.of(resultSet.getString("name"));
                 set.add(role);
             }
@@ -195,10 +186,7 @@ public class UserDaoJdbcImpl extends AbstractDao<User> implements UserDao {
                 String login = resultSetUsers.getString("login");
                 String password = resultSetUsers.getString("token");
                 String token = resultSetUsers.getString("password");
-                user.setUserId(userId);
-                user.setLogin(login);
-                user.setPassword(password);
-                user.setToken(token);
+                user = setUserFields(user, userId, login, password, token);
                 String query =
                         "SELECT name FROM ishop.roles INNER JOIN ishop.roles_users "
                                 + "ON ishop.roles.roleId = ishop.roles_users.roleId "
@@ -217,5 +205,14 @@ public class UserDaoJdbcImpl extends AbstractDao<User> implements UserDao {
             logger.error("Can't get users", e);
         }
         return list;
+    }
+
+    private User setUserFields(User user, Long userId
+            , String login, String password, String token){
+        user.setLogin(login);
+        user.setPassword(password);
+        user.setUserId(userId);
+        user.setToken(token);
+        return user;
     }
 }

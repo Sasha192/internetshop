@@ -47,7 +47,7 @@ public class User {
         roles.add(Role.of("USER"));
     }
 
-    public User(String login, String token, Long userId, String password) {
+    public User(Long userId, String login, String password, String token) {
         this.login = login;
         this.token = token;
         this.userId = userId;
