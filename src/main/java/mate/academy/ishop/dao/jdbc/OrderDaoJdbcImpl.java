@@ -8,16 +8,19 @@ import mate.academy.ishop.model.Item;
 import mate.academy.ishop.model.Order;
 import org.apache.log4j.Logger;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDaoJdbcImpl extends AbstractDao<Order> implements OrderDao {
+    private static Logger logger = Logger.getLogger(OrderDaoJdbcImpl.class);
 
     @Inject
     private static UserDao userDao;
-
-    private static Logger logger = Logger.getLogger(ItemDaoJdbcImpl.class);
 
     public OrderDaoJdbcImpl(Connection connection) {
         super(connection);
@@ -59,10 +62,13 @@ public class OrderDaoJdbcImpl extends AbstractDao<Order> implements OrderDao {
     @Override
     public Order get(Long id) {
         Order order = null;
-        String getOrderQuery = "SELECT ishop.orders.orderId, ishop.orders.userId, " +
-                "ishop.items.idItem, ishop.items.name, ishop.items.price " +
-                "FROM ishop.orders INNER JOIN ishop.order_items ON ishop.orders.orderId=ishop.order_items.orderId "
-                + "INNER JOIN ishop.items ON ishop.order_items.itemId=ishop.items.idItem WHERE ishop.orders.orderId=?;";
+        String getOrderQuery = "SELECT ishop.orders.orderId, ishop.orders.userId, "
+                .concat("ishop.items.idItem, ishop.items.name, ishop.items.price ")
+                .concat("FROM ishop.orders INNER JOIN ishop.order_items ")
+                .concat("ON ishop.orders.orderId=ishop.order_items.orderId ")
+                .concat("INNER JOIN ishop.items ")
+                .concat("ON ishop.order_items.itemId=ishop.items.idItem")
+                .concat("WHERE ishop.orders.orderId=?;");
         try (PreparedStatement statement = connection.prepareStatement(getOrderQuery)) {
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BucketDaoJdbcImpl extends AbstractDao<Bucket> implements BucketDao {
-    private static Logger logger = Logger.getLogger(ItemDaoJdbcImpl.class);
+    private static Logger logger = Logger.getLogger(BucketDaoJdbcImpl.class);
 
     public BucketDaoJdbcImpl(Connection connection) {
         super(connection);

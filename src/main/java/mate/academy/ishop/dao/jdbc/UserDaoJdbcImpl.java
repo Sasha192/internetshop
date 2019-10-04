@@ -21,13 +21,10 @@ import java.util.Optional;
 import java.util.Set;
 
 public class UserDaoJdbcImpl extends AbstractDao<User> implements UserDao {
-    @Inject
-    private static UserDao userDao;
+    private static Logger logger = Logger.getLogger(UserDaoJdbcImpl.class);
 
     @Inject
     private static BucketDao bucketDao;
-
-    private static Logger logger = Logger.getLogger(ItemDaoJdbcImpl.class);
 
     public UserDaoJdbcImpl(Connection connection) {
         super(connection);
@@ -57,7 +54,8 @@ public class UserDaoJdbcImpl extends AbstractDao<User> implements UserDao {
 
     @Override
     public User get(Long id) {
-        String query = "SELECT ishop.users.userId, ishop.users.login, ishop.users.password, "
+        String query =
+                "SELECT ishop.users.userId, ishop.users.login, ishop.users.password, "
                 + "ishop.users.token, ishop.roles.name FROM ishop.users INNER JOIN ishop.roles_users "
                 + "ON ishop.users.userId = ishop.roles_users.userId INNER JOIN ishop.roles "
                 + "ON ishop.roles_users.roleId = ishop.roles.roleId WHERE ishop.users.userId = ?;";
@@ -117,8 +115,10 @@ public class UserDaoJdbcImpl extends AbstractDao<User> implements UserDao {
     @Override
     public User login(String login, String password) throws AuthenticationException {
         User user = null;
-        String query = "SELECT ishop.users.userId, ishop.users.login, ishop.users.token, ishop.roles.name "
-                + "FROM ishop.users INNER JOIN ishop.roles_users ON ishop.users.userId = ishop.roles_users.userId "
+        String query =
+                "SELECT ishop.users.userId, ishop.users.login, ishop.users.token, ishop.roles.name "
+                + "FROM ishop.users INNER JOIN ishop.roles_users "
+                + "ON ishop.users.userId = ishop.roles_users.userId "
                 + "INNER JOIN ishop.roles ON ishop.roles_users.roleId = ishop.roles.roleId "
                 + "WHERE login = ? AND password = ?;";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
@@ -153,8 +153,10 @@ public class UserDaoJdbcImpl extends AbstractDao<User> implements UserDao {
         Optional<User> optionalUser = Optional.empty();
         String query =
                 "SELECT ishop.users.userId, ishop.users.login, ishop.users.password, ishop.roles.name "
-                        + "FROM ishop.users INNER JOIN ishop.roles_users ON ishop.users.userId = ishop.roles_users.userId "
-                        + "INNER JOIN ishop.roles ON ishop.roles_users.roleId = ishop.roles.roleId "
+                        + "FROM ishop.users INNER JOIN ishop.roles_users "
+                        + "ON ishop.users.userId = ishop.roles_users.userId "
+                        + "INNER JOIN ishop.roles "
+                        + "ON ishop.roles_users.roleId = ishop.roles.roleId "
                         + "WHERE token = ?;";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, token);
