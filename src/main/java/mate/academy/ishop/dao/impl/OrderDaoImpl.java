@@ -1,10 +1,12 @@
 package mate.academy.ishop.dao.impl;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import mate.academy.ishop.dao.OrderDao;
 import mate.academy.ishop.dao.Storage;
 import mate.academy.ishop.lib.Dao;
+import mate.academy.ishop.model.Item;
 import mate.academy.ishop.model.Order;
 
 @Dao
@@ -34,10 +36,7 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public Order update(Order newOrder) {
-        Order order = get(newOrder);
-        order.setItems(newOrder.getItems());
-        order.setUser(newOrder.getUser());
-        return order;
+        return null;
     }
 
     @Override
@@ -48,5 +47,15 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public void delete(Long orderId) {
         Storage.orders.removeIf(item -> item.getOrderId().equals(orderId));
+    }
+
+    @Override
+    public List<Order> getOrders(Long userId) {
+        return null;
+    }
+
+    @Override
+    public List<Item> getItems(Long orderId, Long userId) {
+        return null;
     }
 }

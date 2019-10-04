@@ -7,31 +7,31 @@ import mate.academy.ishop.generator.IdGenerator;
 
 public class Bucket {
     private List<Item> itemsList;
-    private User user;
+    private Long userId;
     private Long bucketId;
 
-    public Bucket(User user) {
-        this.user = user;
+    public Bucket(Long userId) {
+        this.userId = userId;
         bucketId = IdGenerator.getBacketId();
         itemsList = new ArrayList<>();
     }
 
-    public Bucket(User user, List<Item> itemsList) {
+    public Bucket(Long userId, List<Item> itemsList) {
         this.itemsList = itemsList;
-        this.user = user;
+        this.userId = userId;
         bucketId = IdGenerator.getBacketId();
     }
 
-    public User getUser() {
-        return user;
+    public Long getUserId() {
+        return userId;
     }
 
     public void setBucketId(final Long bucketId) {
         this.bucketId = bucketId;
     }
 
-    public void setUser(final User user) {
-        this.user = user;
+    public void setUserId(final User user) {
+        this.userId = userId;
     }
 
     public Long getBucketId() {

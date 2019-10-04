@@ -9,9 +9,9 @@ import java.util.UUID;
 import mate.academy.ishop.generator.IdGenerator;
 
 public class User {
-    private final Long userId;
-    private final String login;
-    private final String token;
+    private String login;
+    private String token;
+    private Long userId;
     private String password;
     private List<Order> completedOrders;
     private Bucket currentBucket;
@@ -27,6 +27,16 @@ public class User {
         roles.add(Role.of("USER"));
     }
 
+    public User() {
+        userId = IdGenerator.getUserId();
+        token = UUID.randomUUID().toString();
+        this.login = "login";
+        password = new String();
+        completedOrders = new ArrayList<Order>();
+        roles = new HashSet<Role>();
+        roles.add(Role.of("USER"));
+    }
+
     public User(final String login, final String password) {
         userId = IdGenerator.getUserId();
         token = UUID.randomUUID().toString();
@@ -35,6 +45,13 @@ public class User {
         completedOrders = new ArrayList<Order>();
         roles = new HashSet<Role>();
         roles.add(Role.of("USER"));
+    }
+
+    public User(String login, String token, Long userId, String password) {
+        this.login = login;
+        this.token = token;
+        this.userId = userId;
+        this.password = password;
     }
 
     public String getLogin() {
@@ -81,9 +98,25 @@ public class User {
         roles.add(role);
     }
 
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
     @Override
     public String toString() {
         return "userId = " + userId
                 + " login " + login;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

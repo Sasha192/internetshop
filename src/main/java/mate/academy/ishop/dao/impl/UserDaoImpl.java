@@ -1,5 +1,6 @@
 package mate.academy.ishop.dao.impl;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -55,5 +56,10 @@ public class UserDaoImpl implements UserDao {
         return Storage.users.stream()
                 .filter(user -> user.getToken().equals(token))
                 .findAny();
+    }
+
+    @Override
+    public List<User> getAll() {
+        return null;
     }
 }

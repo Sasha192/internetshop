@@ -6,20 +6,26 @@ import mate.academy.ishop.generator.IdGenerator;
 public class Order {
     private List<Item> items;
     private Long orderId;
-    private User user;
+    private Long userId;
 
-    public Order(List<Item> items, User user) {
+    public Order(List<Item> items, Long userId) {
         orderId = IdGenerator.getOrderId();
         this.items = items;
-        this.user = user;
+        this.userId = userId;
     }
 
-    public User getUser() {
-        return user;
+    public Order(Long orderId, Long userId, List<Item> items) {
+        this.orderId = orderId;
+        this.userId = userId;
+        this.items = items;
     }
 
-    public void setUser(final User user) {
-        this.user = user;
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(final Long userId) {
+        this.userId = userId;
     }
 
     public List<Item> getItems() {

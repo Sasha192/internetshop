@@ -1,5 +1,6 @@
 package mate.academy.ishop.dao;
 
+import java.util.List;
 import java.util.Optional;
 
 import mate.academy.ishop.exceptions.AuthenticationException;
@@ -17,4 +18,6 @@ public interface UserDao {
     User login(String login, String password) throws AuthenticationException;
 
     Optional<User> getByToken(String token);
+
+    public List<User> getAll();
 }
