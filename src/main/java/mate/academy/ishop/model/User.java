@@ -16,6 +16,7 @@ public class User {
     private List<Order> completedOrders;
     private Bucket currentBucket;
     private Set<Role> roles;
+    byte[] seed;
 
     public User(final String login) {
         userId = IdGenerator.getUserId();
@@ -118,5 +119,13 @@ public class User {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public byte[] getSeed() {
+        return seed;
+    }
+
+    public void setSeed(byte[] seed) {
+        this.seed = seed;
     }
 }

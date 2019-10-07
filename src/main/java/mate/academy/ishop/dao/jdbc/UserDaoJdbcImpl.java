@@ -8,6 +8,7 @@ import mate.academy.ishop.lib.Inject;
 import mate.academy.ishop.model.Bucket;
 import mate.academy.ishop.model.Role;
 import mate.academy.ishop.model.User;
+import mate.academy.ishop.utils.HashingUtil;
 import org.apache.log4j.Logger;
 
 import java.sql.Connection;
@@ -32,13 +33,16 @@ public class UserDaoJdbcImpl extends AbstractDao<User> implements UserDao {
 
     @Override
     public User add(User user) {
-        String query = "INSERT INTO ishop.users (login, token, password) "
-                + "VALUES (?, ?, ?);";
+        String query = "INSERT INTO ishop.users (login, token, password, seed) "
+                + "VALUES (?, ?, ?, ?);";
         try (PreparedStatement statementUsers = connection.prepareStatement(
                 query, PreparedStatement.RETURN_GENERATED_KEYS)) {
+            byte[] seed = HashingUtil.getSeed();
+            String hashedPswd = HashingUtil.hashPassword(user.getPassword(), seed);
             statementUsers.setString(1, user.getLogin());
             statementUsers.setString(2, user.getToken());
-            statementUsers.setString(3, user.getPassword());
+            statementUsers.setString(3, hashedPswd);
+            statementUsers.setBytes(4, seed);
             statementUsers.executeUpdate();
             ResultSet generatedKeys = statementUsers.getGeneratedKeys();
             generatedKeys.next();
@@ -70,7 +74,9 @@ public class UserDaoJdbcImpl extends AbstractDao<User> implements UserDao {
                 String login = resultSet.getString("login");
                 String password = resultSet.getString("password");
                 String token = resultSet.getString("token");
-                user = setUserFields(user, userId, login, password, token);
+                byte[] seed = resultSet.getBytes("seed");
+                password = HashingUtil.hashPassword(password, seed);
+                user = setUserFields(user, userId, login, password, token, seed);
                 Role role = Role.of(resultSet.getString("name"));
                 set.add(role);
             }
@@ -117,18 +123,24 @@ public class UserDaoJdbcImpl extends AbstractDao<User> implements UserDao {
                 + "FROM ishop.users INNER JOIN ishop.roles_users "
                 + "ON ishop.users.userId = ishop.roles_users.userId "
                 + "INNER JOIN ishop.roles ON ishop.roles_users.roleId = ishop.roles.roleId "
-                + "WHERE login = ? AND password = ?;";
+                + "WHERE login = ?;";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, login);
-            statement.setString(2, password);
             ResultSet resultSet = statement.executeQuery();
             Set<Role> set = new HashSet<>();
             user = new User();
             while (resultSet.next()) {
+                byte [] seed = resultSet.getBytes("seed");
+                String hashedPswd = HashingUtil.hashPassword(password, seed);
+                if (!login.equals(resultSet.getString("login"))
+                        || !hashedPswd.equals(
+                                resultSet.getString("password"))) {
+                    throw new AuthenticationException("Incorrect login or password!");
+                }
                 Long id = resultSet.getLong("userId");
                 String name = resultSet.getString("login");
                 String token = resultSet.getString("token");
-                user = setUserFields(user, id, login, password, token);
+                user = setUserFields(user, id, login, hashedPswd, token, seed);
                 Role role = Role.of(resultSet.getString("name"));
                 set.add(role);
             }
@@ -161,7 +173,9 @@ public class UserDaoJdbcImpl extends AbstractDao<User> implements UserDao {
                 Long id = resultSet.getLong("userId");
                 String login = resultSet.getString("login");
                 String password = resultSet.getString("password");
-                user = setUserFields(user, id, login, password, token);
+                byte[] seed = resultSet.getBytes("seed");
+                password = HashingUtil.hashPassword(password, seed);
+                user = setUserFields(user, id, login, password, token, seed);
                 Role role = Role.of(resultSet.getString("name"));
                 set.add(role);
             }
@@ -186,7 +200,9 @@ public class UserDaoJdbcImpl extends AbstractDao<User> implements UserDao {
                 String login = resultSetUsers.getString("login");
                 String password = resultSetUsers.getString("token");
                 String token = resultSetUsers.getString("password");
-                user = setUserFields(user, userId, login, password, token);
+                byte[] seed = resultSetUsers.getBytes("seed");
+                password = HashingUtil.hashPassword(password, seed);
+                user = setUserFields(user, userId, login, password, token, seed);
                 String query =
                         "SELECT name FROM ishop.roles INNER JOIN ishop.roles_users "
                                 + "ON ishop.roles.roleId = ishop.roles_users.roleId "
@@ -208,11 +224,12 @@ public class UserDaoJdbcImpl extends AbstractDao<User> implements UserDao {
     }
 
     private User setUserFields(User user, Long userId
-            , String login, String password, String token){
+            , String login, String password, String token, byte[] seed){
         user.setLogin(login);
         user.setPassword(password);
         user.setUserId(userId);
         user.setToken(token);
+        user.setSeed(seed);
         return user;
     }
 }
