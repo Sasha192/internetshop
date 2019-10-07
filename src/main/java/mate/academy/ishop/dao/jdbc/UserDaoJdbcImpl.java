@@ -189,8 +189,8 @@ public class UserDaoJdbcImpl extends AbstractDao<User> implements UserDao {
 
     @Override
     public List<User> getAll() {
-        List<User> list = new ArrayList<>();
         String queryUsers = "SELECT * FROM ishop.users";
+        List<User> list = new ArrayList<>();
         User user = null;
         try (PreparedStatement statementUsers = connection.prepareStatement(queryUsers);
              ResultSet resultSetUsers = statementUsers.executeQuery()) {
