@@ -42,7 +42,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order completeOrder(List<Item> items, Long userId) {
-        Order newOrder = new Order(items, userDao.get(userId));
+        Order newOrder = new Order(items, userId);
         orderDao.add(newOrder);
         userDao.get(userId)
                 .getCompletedOrders().add(newOrder);

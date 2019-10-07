@@ -26,7 +26,7 @@ public class AddItemsController extends HttpServlet {
         Item item = itemService.get(Long.valueOf(request.getParameter("item")));
         Bucket bucket = user.getCurrentBucket();
         if (bucket == null) {
-            bucket = new Bucket(user);
+            bucket = new Bucket(user.getUserId());
             user.setCurrentBucket(bucket);
             bucketService.add(bucket);
         }

@@ -40,8 +40,8 @@ public class MockDataInitializer implements ServletContextListener {
                 user.addRole(Role.of("ADMIN"));
                 user.setPassword("0");
             }
-            Bucket bucket = new Bucket(user);
-            Order order = new Order(bucket.getItemsList(), user);
+            Bucket bucket = new Bucket(user.getUserId());
+            Order order = new Order(bucket.getItemsList(), user.getUserId());
             user.setCurrentBucket(bucket);
             user.getCompletedOrders().add(order);
             userService.add(user);
