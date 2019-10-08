@@ -2,6 +2,7 @@ package mate.academy.ishop.dao.jdbc;
 
 import mate.academy.ishop.dao.AbstractDao;
 import mate.academy.ishop.dao.BucketDao;
+import mate.academy.ishop.lib.Dao;
 import mate.academy.ishop.model.Bucket;
 import mate.academy.ishop.model.Item;
 import org.apache.log4j.Logger;
@@ -13,6 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Dao
 public class BucketDaoJdbcImpl extends AbstractDao<Bucket> implements BucketDao {
     private static Logger logger = Logger.getLogger(BucketDaoJdbcImpl.class);
 
@@ -22,7 +24,7 @@ public class BucketDaoJdbcImpl extends AbstractDao<Bucket> implements BucketDao 
 
     @Override
     public Bucket add(Bucket bucket) {
-        String query = "INSERT INTO ishop.buckets (userId) VALUES ?;";
+        String query = "INSERT INTO ishop.buckets VALUES ?;";
         try (PreparedStatement statementBuckets = connection.prepareStatement(
                 query, PreparedStatement.RETURN_GENERATED_KEYS)) {
             statementBuckets.setLong(1, bucket.getUserId());

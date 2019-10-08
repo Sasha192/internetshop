@@ -8,12 +8,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import mate.academy.ishop.lib.Inject;
 import mate.academy.ishop.lib.Injector;
+import mate.academy.ishop.model.Item;
 import mate.academy.ishop.service.BucketService;
 import mate.academy.ishop.service.ItemService;
 import mate.academy.ishop.service.OrderService;
 import mate.academy.ishop.service.UserService;
+import org.apache.log4j.Logger;
 
 public class IndexController extends HttpServlet {
+    private static Logger LOGGER = Logger.getLogger(IndexController.class);
 
     static {
         try {
@@ -39,6 +42,8 @@ public class IndexController extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+        Item item = itemService.get(1L);
+        LOGGER.info(item);
         req.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(req, resp);
     }
 }

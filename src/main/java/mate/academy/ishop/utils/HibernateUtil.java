@@ -20,7 +20,7 @@ public class HibernateUtil {
     private HibernateUtil() {
     }
 
-    public SessionFactory getSessionFactory(){
+    public static SessionFactory getSessionFactory(){
         return sessionFactory;
     }
 }

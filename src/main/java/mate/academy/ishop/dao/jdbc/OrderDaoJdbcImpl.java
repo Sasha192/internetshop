@@ -3,6 +3,7 @@ package mate.academy.ishop.dao.jdbc;
 import mate.academy.ishop.dao.AbstractDao;
 import mate.academy.ishop.dao.OrderDao;
 import mate.academy.ishop.dao.UserDao;
+import mate.academy.ishop.lib.Dao;
 import mate.academy.ishop.lib.Inject;
 import mate.academy.ishop.model.Item;
 import mate.academy.ishop.model.Order;
@@ -16,6 +17,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+@Dao
 public class OrderDaoJdbcImpl extends AbstractDao<Order> implements OrderDao {
     private static Logger logger = Logger.getLogger(OrderDaoJdbcImpl.class);
 

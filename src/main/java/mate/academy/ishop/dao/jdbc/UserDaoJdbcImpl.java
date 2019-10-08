@@ -4,6 +4,7 @@ import mate.academy.ishop.dao.AbstractDao;
 import mate.academy.ishop.dao.BucketDao;
 import mate.academy.ishop.dao.UserDao;
 import mate.academy.ishop.exceptions.AuthenticationException;
+import mate.academy.ishop.lib.Dao;
 import mate.academy.ishop.lib.Inject;
 import mate.academy.ishop.model.Bucket;
 import mate.academy.ishop.model.Role;
@@ -21,6 +22,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+@Dao
 public class UserDaoJdbcImpl extends AbstractDao<User> implements UserDao {
     private static Logger logger = Logger.getLogger(UserDaoJdbcImpl.class);
 
