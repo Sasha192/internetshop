@@ -62,10 +62,29 @@ public class ItemDaoHibernateImpl implements ItemDao {
 
     @Override
     public void delete(Long id) {
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            Item item = new Item();
+            item.setIdItem(id);
+            session.delete(item);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            LOGGER.error("Can't delete item", e);
+        }
     }
 
     @Override
     public List<Item> getAll() {
-        return null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return session.createCriteria(Item.class).list();
+        }
+        catch (Exception e){
+            LOGGER.error("Can't create Criteria(Item.class)", e);
+            throw new RuntimeException();
+        }
     }
 }
