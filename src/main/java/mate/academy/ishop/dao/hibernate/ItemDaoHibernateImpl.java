@@ -9,7 +9,6 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.List;
-import java.util.Optional;
 
 @Dao
 public class ItemDaoHibernateImpl implements ItemDao {
@@ -17,36 +16,49 @@ public class ItemDaoHibernateImpl implements ItemDao {
 
     @Override
     public Item add(Item item) {
+        Session session = null;
         Transaction transaction = null;
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
             session.save(item);
             transaction.commit();
         } catch (Exception e){
-            if(transaction != null){
+            if(transaction != null) {
                 transaction.rollback();
             }
             LOGGER.error("Can't create item.", e);
-            throw new RuntimeException();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
         return item;
     }
 
     @Override
     public Item get(Long id) {
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        Session session = null;
+        try{
+            session = HibernateUtil.getSessionFactory().openSession();
             Item item = session.get(Item.class, id);
             return item;
         } catch (Exception e){
             LOGGER.error("Can't open Session.", e);
             throw new RuntimeException();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
     }
 
     @Override
     public Item update(Item item) {
         Transaction transaction = null;
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        Session session = null;
+        try{
+            session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
             session.update(item);
             transaction.commit();
@@ -56,6 +68,10 @@ public class ItemDaoHibernateImpl implements ItemDao {
             }
             LOGGER.error("Can't update item.", e);
             throw new RuntimeException();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
         return item;
     }
@@ -63,7 +79,9 @@ public class ItemDaoHibernateImpl implements ItemDao {
     @Override
     public void delete(Long id) {
         Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        Session session = null;
+        try{
+            session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
             Item item = new Item();
             item.setIdItem(id);
@@ -74,17 +92,26 @@ public class ItemDaoHibernateImpl implements ItemDao {
                 transaction.rollback();
             }
             LOGGER.error("Can't delete item", e);
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
     }
 
     @Override
     public List<Item> getAll() {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        Session session = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
             return session.createCriteria(Item.class).list();
-        }
-        catch (Exception e){
+        } catch (Exception e){
             LOGGER.error("Can't create Criteria(Item.class)", e);
             throw new RuntimeException();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
     }
 }
