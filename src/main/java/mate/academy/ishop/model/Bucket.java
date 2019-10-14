@@ -5,33 +5,52 @@ import java.util.List;
 
 import mate.academy.ishop.generator.IdGenerator;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "buckets")
 public class Bucket {
-    private List<Item> itemsList;
-    private Long userId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "bucketId")
     private Long bucketId;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "buckets_items",
+            joinColumns = @JoinColumn(name = "bucketId", referencedColumnName = "bucketId"),
+            inverseJoinColumns = @JoinColumn(name = "itemId", referencedColumnName = "idItem"))
+    private List<Item> itemsList;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "userId", referencedColumnName = "userId")
+    private User user;
+
+    public Bucket(){
+
+    }
 
     public Bucket(Long userId) {
-        this.userId = userId;
+        user = new User();
+        user.setUserId(userId);
         bucketId = IdGenerator.getBacketId();
         itemsList = new ArrayList<>();
     }
 
     public Bucket(Long userId, List<Item> itemsList) {
         this.itemsList = itemsList;
-        this.userId = userId;
+        this.user = new User();
+        user.setUserId(userId);
         bucketId = IdGenerator.getBacketId();
     }
 
-    public Long getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
     public void setBucketId(final Long bucketId) {
         this.bucketId = bucketId;
     }
 
-    public void setUserId(final User user) {
-        this.userId = userId;
+    public void setUser(final User user) {
+        this.user = user;
     }
 
     public Long getBucketId() {

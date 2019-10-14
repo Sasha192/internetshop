@@ -6,11 +6,11 @@ import mate.academy.ishop.model.Item;
 import java.util.List;
 
 public interface BucketDao {
-    public Bucket add(Bucket item);
+    public Bucket add(Bucket bucket);
 
     public Bucket get(Long id);
 
-    public Bucket update(Bucket item);
+    public Bucket update(Bucket bucket);
 
     public void delete(Long id);
 

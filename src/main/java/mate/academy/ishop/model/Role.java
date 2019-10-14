@@ -2,8 +2,17 @@ package mate.academy.ishop.model;
 
 import mate.academy.ishop.generator.IdGenerator;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "roles")
 public class Role {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "roleId")
     private final Long id;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "name", columnDefinition = "VARCHAR")
     private RoleName roleName;
 
     public Role() {

@@ -8,13 +8,26 @@ import java.util.UUID;
 
 import mate.academy.ishop.generator.IdGenerator;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "users")
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "userId")
+    private Long userId;
     private String login;
     private String token;
-    private Long userId;
     private String password;
+    @Transient
     private List<Order> completedOrders;
+    @OneToOne(mappedBy = "user")
     private Bucket currentBucket;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "roles_users",
+            joinColumns = @JoinColumn(name = "userId", referencedColumnName = "userId"),
+            inverseJoinColumns = @JoinColumn(name = "roleId", referencedColumnName = "roleId"))
     private Set<Role> roles;
     byte[] seed;
 
