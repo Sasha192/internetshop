@@ -17,6 +17,7 @@
         <mapping class="mate.academy.ishop.model.Role"/>
         <mapping class="mate.academy.ishop.model.User"/>
         <mapping class="mate.academy.ishop.model.Bucket"/>
+        <mapping class="mate.academy.ishop.model.Order"/>
     </session-factory>
 
 </hibernate-configuration>

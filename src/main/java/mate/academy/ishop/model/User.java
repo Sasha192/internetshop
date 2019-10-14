@@ -22,9 +22,9 @@ public class User {
     private String password;
     @Transient
     private List<Order> completedOrders;
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", orphanRemoval = true)
     private Bucket currentBucket;
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "roles_users",
             joinColumns = @JoinColumn(name = "userId", referencedColumnName = "userId"),
             inverseJoinColumns = @JoinColumn(name = "roleId", referencedColumnName = "roleId"))
@@ -49,6 +49,7 @@ public class User {
         completedOrders = new ArrayList<Order>();
         roles = new HashSet<Role>();
         roles.add(Role.of("USER"));
+        currentBucket = new Bucket(userId);
     }
 
     public User(final String login, final String password) {
