@@ -6,6 +6,7 @@ import mate.academy.ishop.model.Role;
 import mate.academy.ishop.model.User;
 import mate.academy.ishop.service.RoleService;
 
+import java.util.Optional;
 import java.util.Set;
 
 public class RoleServiceImpl implements RoleService {
@@ -17,7 +18,7 @@ public class RoleServiceImpl implements RoleService {
         return roleDao.getRoles(user);
     }
 
-    public Role getRoleByName(String name) {
+    public Optional<Role> getRoleByName(String name) {
         return roleDao.getRoleByName(name);
     }
 }

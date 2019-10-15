@@ -1,8 +1,6 @@
 package mate.academy.ishop.dao.hibernate;
 
 import mate.academy.ishop.dao.OrderDao;
-import mate.academy.ishop.dao.UserDao;
-import mate.academy.ishop.lib.Inject;
 import mate.academy.ishop.model.Item;
 import mate.academy.ishop.model.Order;
 import mate.academy.ishop.utils.HibernateUtil;
@@ -13,14 +11,13 @@ import org.hibernate.query.Query;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class OrderDaoHibernateImpl implements OrderDao {
     private static final Logger LOGGER = Logger.getLogger(OrderDaoHibernateImpl.class);
-    @Inject
-    private static UserDao userDao;
 
     @Override
-    public Order add(Order order) {
+    public Optional<Order> add(Order order) {
         Session session = null;
         Transaction transaction = null;
         Long orderId = null;
@@ -34,32 +31,33 @@ public class OrderDaoHibernateImpl implements OrderDao {
             if (transaction != null) {
                 transaction.rollback();
             }
+            return Optional.empty();
         } finally {
             if (session != null) {
                 session.close();
             }
         }
         order.setOrderId(orderId);
-        return order;
+        return Optional.of(order);
     }
 
     @Override
-    public Order get(Order order) {
+    public Optional<Order> get(Order order) {
         return get(order.getOrderId());
     }
 
     @Override
-    public Order get(Long orderId) {
+    public Optional<Order> get(Long orderId) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.get(Order.class, orderId);
+            return Optional.of(session.get(Order.class, orderId));
         } catch (Exception e) {
             LOGGER.error("Can't get order", e);
-            return null;
+            return Optional.empty();
         }
     }
 
     @Override
-    public Order update(Order order) {
+    public Optional<Order> update(Order order) {
         Session session = null;
         Transaction transaction = null;
         try {
@@ -72,12 +70,13 @@ public class OrderDaoHibernateImpl implements OrderDao {
                 transaction.rollback();
             }
             LOGGER.error("Can't update order", e);
+            return Optional.empty();
         } finally {
             if (session != null) {
                 session.close();
             }
         }
-        return order;
+        return Optional.empty();
     }
 
     @Override
@@ -90,7 +89,7 @@ public class OrderDaoHibernateImpl implements OrderDao {
         Session session = null;
         Transaction transaction = null;
         try {
-            Order order = get(orderId);
+            Order order = get(orderId).get();
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
             session.delete(order);
@@ -122,7 +121,7 @@ public class OrderDaoHibernateImpl implements OrderDao {
     @Override
     public List<Item> getItems(Long orderId, Long userId) {
         try {
-            Order order = get(orderId);
+            Order order = get(orderId).get();
             return order.getItems();
         } catch (Exception e) {
             LOGGER.error("Can't get items from order", e);

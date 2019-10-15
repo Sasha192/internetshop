@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
+import java.util.Optional;
 import java.util.Set;
 
 public class RoleDaoHibernateImpl implements RoleDao {
@@ -19,12 +20,12 @@ public class RoleDaoHibernateImpl implements RoleDao {
 
     @Override
     public Set<Role> getRoles(User user) {
-        User userFromDb = userDao.get(user.getUserId());
+        User userFromDb = userDao.get(user.getUserId()).get();
         return userFromDb.getRoles();
     }
 
     @Override
-    public Role getRoleByName(String name) {
+    public Optional<Role> getRoleByName(String name) {
         Session session = null;
         Role role = null;
         try {
@@ -35,11 +36,12 @@ public class RoleDaoHibernateImpl implements RoleDao {
             role = (Role) query.uniqueResult();
         } catch (Exception e) {
             LOGGER.error("Can't get role by name", e);
+            return Optional.empty();
         } finally {
             if (session != null) {
                 session.close();
             }
         }
-        return role;
+        return Optional.of(role);
     }
 }

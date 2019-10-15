@@ -8,11 +8,11 @@ import mate.academy.ishop.model.Order;
 import mate.academy.ishop.model.User;
 
 public interface UserService {
-    User add(User user);
+    Optional<User> add(User user);
 
-    User get(Long id);
+    Optional<User> get(Long id);
 
-    User update(User user);
+    Optional<User> update(User user);
 
     void delete(Long id);
 
@@ -22,7 +22,7 @@ public interface UserService {
 
     List<User> getAll();
 
-    User login(String login, String password) throws AuthenticationException;
+    Optional<User> login(String login, String password) throws AuthenticationException;
 
     Optional<User> getByToken(String value);
 }

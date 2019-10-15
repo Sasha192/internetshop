@@ -1,9 +1,7 @@
 package mate.academy.ishop.dao.hibernate;
 
-import mate.academy.ishop.dao.ItemDao;
 import mate.academy.ishop.dao.UserDao;
 import mate.academy.ishop.exceptions.AuthenticationException;
-import mate.academy.ishop.lib.Inject;
 import mate.academy.ishop.model.User;
 import mate.academy.ishop.utils.HibernateUtil;
 import org.apache.log4j.Logger;
@@ -19,7 +17,7 @@ public class UserDaoHibernateImpl implements UserDao {
     private static Logger LOGGER = Logger.getLogger(UserDaoHibernateImpl.class);
 
     @Override
-    public User add(User user) {
+    public Optional<User> add(User user) {
         Transaction transaction = null;
         Session session = null;
         Long userId;
@@ -33,28 +31,28 @@ public class UserDaoHibernateImpl implements UserDao {
                 transaction.rollback();
             }
             LOGGER.error("Can't add user", e);
-            return null;
+            return Optional.empty();
         } finally {
             if (session != null) {
                 session.close();
             }
         }
         user.setUserId(userId);
-        return user;
+        return Optional.of(user);
     }
 
     @Override
-    public User get(Long id) {
+    public Optional<User> get(Long id) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.get(User.class, id);
+            return Optional.of(session.get(User.class, id));
         } catch (Exception e) {
             LOGGER.error("Can't get user", e);
-            return null;
+            return Optional.empty();
         }
     }
 
     @Override
-    public User update(User user) {
+    public Optional<User> update(User user) {
         Transaction transaction = null;
         Session session = null;
         try {
@@ -67,12 +65,13 @@ public class UserDaoHibernateImpl implements UserDao {
                 transaction.rollback();
             }
             LOGGER.error("Can't update user", e);
+            return Optional.empty();
         } finally {
             if (session != null) {
                 session.close();
             }
         }
-        return user;
+        return Optional.of(user);
     }
 
     @Override
@@ -99,12 +98,12 @@ public class UserDaoHibernateImpl implements UserDao {
     }
 
     @Override
-    public User login(String login, String password) throws AuthenticationException {
+    public Optional<User> login(String login, String password) throws AuthenticationException {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Query query = session.createQuery("from User where login=:login");
             query.setParameter("login", login);
             User user = (User) query.uniqueResult();
-            return user;
+            return Optional.ofNullable(user);
         }
     }
 

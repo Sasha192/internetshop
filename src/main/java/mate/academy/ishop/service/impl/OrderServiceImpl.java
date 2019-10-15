@@ -2,6 +2,7 @@ package mate.academy.ishop.service.impl;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import mate.academy.ishop.dao.OrderDao;
 import mate.academy.ishop.dao.UserDao;
@@ -21,17 +22,17 @@ public class OrderServiceImpl implements OrderService {
     private static UserDao userDao;
 
     @Override
-    public Order add(Order order) {
+    public Optional<Order> add(Order order) {
         return orderDao.add(order);
     }
 
     @Override
-    public Order get(Long id) {
+    public Optional<Order> get(Long id) {
         return orderDao.get(id);
     }
 
     @Override
-    public Order update(Order order) {
+    public Optional<Order> update(Order order) {
         return orderDao.update(order);
     }
 
@@ -41,14 +42,14 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order completeOrder(List<Item> items, Long userId) {
-        Order newOrder = new Order(items, userId);
+    public Optional<Order> completeOrder(List<Item> items, Long userId) {
+        Order newOrder = new Order(items, userDao.get(userId).get());
         orderDao.add(newOrder);
-        userDao.get(userId)
+        userDao.get(userId).get()
                 .getCompletedOrders().add(newOrder);
-        userDao.get(userId)
+        userDao.get(userId).get()
                 .getCurrentBucket().getItemsList().clear();
-        return newOrder;
+        return Optional.ofNullable(newOrder);
     }
 
     public Double getCost(Order order) {

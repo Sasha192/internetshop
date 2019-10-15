@@ -1,8 +1,9 @@
 package mate.academy.ishop.service.impl;
 
 import java.util.List;
+import java.util.Optional;
+
 import mate.academy.ishop.dao.ItemDao;
-import mate.academy.ishop.dao.Storage;
 import mate.academy.ishop.lib.Inject;
 import mate.academy.ishop.lib.Service;
 import mate.academy.ishop.model.Item;
@@ -15,17 +16,17 @@ public class ItemServiceImpl implements ItemService {
     private static ItemDao itemDao;
 
     @Override
-    public Item add(Item item) {
+    public Optional<Item> add(Item item) {
         return itemDao.add(item);
     }
 
     @Override
-    public Item get(Long id) {
+    public Optional<Item> get(Long id) {
         return itemDao.get(id);
     }
 
     @Override
-    public Item update(Item item) {
+    public Optional<Item> update(Item item) {
         return itemDao.update(item);
     }
 

@@ -1,9 +1,6 @@
 package mate.academy.ishop.dao.hibernate;
 
 import mate.academy.ishop.dao.BucketDao;
-import mate.academy.ishop.dao.ItemDao;
-import mate.academy.ishop.dao.UserDao;
-import mate.academy.ishop.lib.Inject;
 import mate.academy.ishop.model.Bucket;
 import mate.academy.ishop.model.Item;
 import mate.academy.ishop.utils.HibernateUtil;
@@ -13,17 +10,13 @@ import org.hibernate.Transaction;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class BucketDaoHibernateImpl implements BucketDao {
     private static Logger LOGGER = Logger.getLogger(BucketDaoHibernateImpl.class);
 
-    @Inject
-    private static UserDao userDao;
-    @Inject
-    private static ItemDao itemDao;
-
     @Override
-    public Bucket add(Bucket bucket) {
+    public Optional<Bucket> add(Bucket bucket) {
         Transaction transaction = null;
         Session session = null;
         Long bucketFromDbId = null;
@@ -37,30 +30,30 @@ public class BucketDaoHibernateImpl implements BucketDao {
                 transaction.rollback();
             }
             LOGGER.error("Can't add bucket", e);
+            return Optional.empty();
         } finally {
             if (session != null) {
                 session.close();
             }
         }
         bucket.setBucketId(bucketFromDbId);
-        return bucket;
+        return Optional.of(bucket);
     }
 
     @Override
-    public Bucket get(Long id) {
+    public Optional<Bucket> get(Long id) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.get(Bucket.class, id);
+            return Optional.of(session.get(Bucket.class, id));
         } catch (Exception e) {
             LOGGER.error("Can't get bucket", e);
-            return null;
+            return Optional.empty();
         }
     }
 
     @Override
-    public Bucket update(Bucket bucket) {
+    public Optional<Bucket> update(Bucket bucket) {
         Transaction transaction = null;
         Session session = null;
-        Bucket oldBucket = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
@@ -71,12 +64,13 @@ public class BucketDaoHibernateImpl implements BucketDao {
                 transaction.rollback();
             }
             LOGGER.error("Can't add item into bucket", e);
+            return Optional.empty();
         } finally {
             if (session != null) {
                 session.close();
             }
         }
-        return bucket;
+        return Optional.of(bucket);
     }
 
     @Override
@@ -104,7 +98,7 @@ public class BucketDaoHibernateImpl implements BucketDao {
     @Override
     public List<Item> getItems(Long bucketId) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Bucket bucket = get(bucketId);
+            Bucket bucket = get(bucketId).get();
             return bucket.getItemsList();
         } catch (Exception e) {
             LOGGER.error("Can't get all items from bucket", e);

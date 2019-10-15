@@ -5,7 +5,18 @@ import java.util.List;
 
 import mate.academy.ishop.generator.IdGenerator;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "buckets")
@@ -36,7 +47,7 @@ public class Bucket {
 
     public Bucket(Long userId, List<Item> itemsList) {
         this.itemsList = itemsList;
-        this.user = new User();
+        user = new User();
         user.setUserId(userId);
         bucketId = IdGenerator.getBacketId();
     }

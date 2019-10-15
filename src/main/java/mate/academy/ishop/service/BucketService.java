@@ -1,20 +1,22 @@
 package mate.academy.ishop.service;
 
 import java.util.List;
+import java.util.Optional;
+
 import mate.academy.ishop.model.Bucket;
 
 public interface BucketService {
-    Bucket add(Bucket bucket);
+    Optional<Bucket> add(Bucket bucket);
 
-    Bucket get(Long id);
+    Optional<Bucket> get(Long id);
 
-    Bucket update(Bucket bucket);
+    Optional<Bucket> update(Bucket bucket);
 
     void delete(Long id);
 
-    Bucket addItem(Long bucketId, Long itemId);
+    Optional<Bucket> addItem(Long bucketId, Long itemId);
 
-    Bucket clear(Long bucketId);
+    Optional<Bucket> clear(Long bucketId);
 
     List getAllItems(Long bucketId);
 
