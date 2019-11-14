@@ -1,6 +1,7 @@
 package mate.academy.ishop.utils;
 
 import org.apache.log4j.Logger;
+import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -11,7 +12,7 @@ public class HibernateUtil {
     private static SessionFactory initSessionFactory() {
         try {
             return new Configuration().configure().buildSessionFactory();
-        } catch (Exception e){
+        } catch (HibernateException e) {
             LOGGER.error("Can't create SessionFactory ", e);
             throw new RuntimeException();
         }
@@ -20,7 +21,7 @@ public class HibernateUtil {
     private HibernateUtil() {
     }
 
-    public static SessionFactory getSessionFactory(){
+    public static SessionFactory getSessionFactory() {
         return sessionFactory;
     }
 }
