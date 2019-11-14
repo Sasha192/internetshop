@@ -1,11 +1,5 @@
 package mate.academy.ishop.dao.jdbc;
 
-import mate.academy.ishop.dao.AbstractDao;
-import mate.academy.ishop.dao.ItemDao;
-import mate.academy.ishop.lib.Dao;
-import mate.academy.ishop.model.Item;
-import org.apache.log4j.Logger;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,6 +7,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import mate.academy.ishop.dao.AbstractDao;
+import mate.academy.ishop.dao.ItemDao;
+import mate.academy.ishop.lib.Dao;
+import mate.academy.ishop.model.Item;
+import org.apache.log4j.Logger;
 
 @Dao
 public class ItemDaoJdbcImpl extends AbstractDao<Item> implements ItemDao {
